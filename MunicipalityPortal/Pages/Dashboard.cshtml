@@ -1,0 +1,398 @@
+﻿@page
+@model SALGAWeb.Pages.DashboardModel
+@{
+    //Layout = "_DashboardLayout";
+}
+
+<div id="start"></div>
+<h2 class="dashtext" style="font-size: 30px; margin-bottom: 50px; color: #3a3f52; margin-left: 2em;">DASHBOARD</h2>
+
+<div class="dash-tainer" >
+    <div class="row" style=" width:100vw; align-content:center;align-content:center;">
+        <div class="card-tainer" >
+
+            <!-- M U N I C I P A L I T Y  I N F O  C A R D -->
+            <div class="card " style="width: 450px; height: 450px;  ">
+                <div class="card-header-dash bg-dark">
+                    <div class="card-title-dash">
+                        Municipal Information
+                    </div>
+                    <i class="material-icons dash-card-icon">
+                        apartment
+                    </i>
+                </div>
+                <div class="card-body" style="border-radius:12px">
+                    <div class="row">
+                        <div class="col">
+                            <div style="background-color: rgb(242, 241, 241); border-radius:5px; padding: 5px;filter: drop-shadow(0px 2px 2px #808080ab);">
+                                @*<h6 style="display:inline-block;"><b>Municipality:</b></h6>*@
+                                <h6 style="color:#F46D16; display:inline-block;"><b>@Model.MunicipalityName</b></h6>
+                                <a class="dash-edit-btn" asp-page="./DemographicInfo">
+                                    <i class="material-icons">
+                                        edit
+                                    </i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <br />
+                                <table class="table">
+                                    <thead></thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="cell-title">Type of Municipality</td>
+                                            <td>@Model.MunicipalityType</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cell-title">Number of people employed</td>
+                                            <td>@Model.MunicipalityDemographics.NoEmployees</td>
+                                        </tr>
+                                        <tr>
+                                            @if (Model.HRMDFunctionDemographics != null)
+                                            {
+                                                <td class="cell-title">Number of HRMD staff</td>
+                                                <td>@Model.HRMDFunctionDemographics.NoPeople</td>
+                                            }
+
+                                        </tr>
+                                        <tr>
+                                            <td class="cell-title">Average monthly payment per person</td>
+                                            <td>@Model.AverageSalaryPP</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cell-title">HR to rest of staff ratio</td>
+                                            <td>@Model.HRRatio</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- E N D  M U N I C I P A L I T Y  I N F O  C A R D -->
+        <!-- M U N I C I P A L I T Y  E M P L O Y M E N T  T Y P E S  C A R D -->
+        <div class="card-tainer">
+            <div class="card" style="width:450px;height:450px;">
+                <div class="card-header-dash bg-dark">
+                    <div class="card-title-dash">Municipal Employment Types </div>
+                    <i class="material-icons dash-card-icon">
+                        badge
+                    </i>
+                </div>
+                <div class="card-body-piechart">
+                    <div class="row">
+                        <div class="col">
+                            <div id="piechart" style="width: 380px; height: 250px;">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- E N D  M U N I C I P A L I T Y  E M P L O Y M E N T  T Y P E S  C A R D -->
+        <!-- C U R R E N T  L E V E L  C A R D -->
+        <div class="card-tainer">
+            <div class="card" style="width:450px;height:450px;">
+                <div class="card-header-dash bg-dark">
+                    <div class="card-title-dash">Current Level </div>
+                    <i class="material-icons dash-card-icon">
+                        calculate
+                    </i>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="d-flex justify-content-start">
+                                <h1 class="dashboardLevelFont">Level </h1>
+                                <div class="dashboardcircle mt-3 ml-3">
+                                    <p style="color:black; font-size: 50px; font-weight:bolder; padding: 6.5px;">@Model.MaturityLevelDashboardViewModel.OverallMaturityLevels.MaturityLevel</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="chartOverall">
+
+                        </div>
+                    </div>
+
+                </div>
+                <!--
+            <div class="card-footer">
+                <button type="button" class="btn btn-score" data-bs-toggle="modal" data-bs-target="#modalMaturityLevelScorecard">Scorecard</button>
+            </div>
+            -->
+            </div>
+
+            @*
+            <div class="modal fade" id="modalMaturityLevelScorecard" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog  modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <b class="modal-title" id="exampleModalLabel">Overall Maturity Level Scoring</b>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <partial name="_OverallMaturityLevelScoreCard"  model="@Model.MaturityLevelDashboardViewModel.OverallMaturityLevelScorecard"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
+        </div>
+        <!-- E N D  C U R R E N T  L E V E L  C A R D -->
+        <!-- O R G A N O G R A M -->
+        <div class="card-tainer">
+            <div class="card" style="width:450px;height:450px;">
+                <div class="card-header-dash bg-dark">
+                    
+                        <div class="card-title-dash">Managerial Team</div>
+                        <i class="material-icons dash-card-icon">
+                            group
+                        </i>
+                    </div>
+                <div class="card-body">
+
+                   
+                        <div class="row">
+                            <div class="col">
+                                <div id="orgChart">
+                                    <div class="ex1">
+
+
+                                        <table class="table ">
+
+                                            <thead>
+                                                <tr>
+                                                    <th class="cell-title">Portfolio</th>
+                                                    <th class="cell-title">Name</th>
+                                                    <th class="cell-title">Contract Expiry Date</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                @foreach (var managerItem in Model.ManagerItems)
+                                                {
+                                                    <tr>
+                                                        <td class="cell-title">@managerItem.Portfolio</td>
+                                                        <td class="cell-title">@managerItem.Person</td>
+                                                        <td class="cell-title">@managerItem.AppointedDate</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+  
+
+        <!-- C H A R T  C A R D S -->
+        @{
+            if (Model.MaturityLevelDashboardViewModel != null && Model.MaturityLevelDashboardViewModel.Sections != null)
+            {
+                for (int i = 0; i < @Model.MaturityLevelDashboardViewModel.Sections.Count; i++)
+                {
+                    String modalID = "modalBox" + i;
+                    String modalTarget = "#" + modalID;
+                    var maturityLvlSect = @Model.MaturityLevelDashboardViewModel.Sections[i];
+                    <div class="card-tainer">
+                        <div class="card" style="width: 450px; height: 450px">
+                                    <div class="card-header-dash bg-dark">
+                                        <div class="card-title-dash">@maturityLvlSect.CategoryName Maturity Level : @maturityLvlSect.QuestionCategoryLevels.MaturityLevel</div>
+                                        <i class="@Model.MaturityLevelDashboardViewModel.Sections[i].IconPath dash-card-icon"></i>
+                                    </div>
+                            <div class="card-body">
+                                @{string chartName = "chart" + maturityLvlSect.PageNo;}
+                                <div id="@chartName" style="background-color:orange">
+                                </div>
+
+                            </div>
+                            <div class="card-footer">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-score" data-bs-toggle="modal" data-bs-target="@modalTarget">Scorecard</button>
+
+                                <!-- Modal -->
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal fade" id="@modalID" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog  modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <b class="modal-title" id="exampleModalLabel" style="color:#ff6a00;">@maturityLvlSect.CategoryName</b>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container-fluid">
+                                        <partial name="_SectionScoreCardReportPartial" model="@Model.MaturityLevelDashboardViewModel.Sections[i].ScoreCard" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                }
+            }
+
+
+        }
+
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { packages: ["orgchart"] });
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawCharts);
+
+
+        function drawCharts() {
+
+
+/*            drawOrgChart();*/
+
+            drawPieChart(@Model.NoPerm54A56,@Model.NoFixedTerm54A56,@Model.NoPermNon54A56, @Model.NoFixedTermNon54A56, @Model.NoOther);
+
+
+            drawChart(@Model.MaturityLevelDashboardViewModel.OverallMaturityLevels.Level1Percent, @Model.MaturityLevelDashboardViewModel.OverallMaturityLevels.Level2Percent, @Model.MaturityLevelDashboardViewModel.OverallMaturityLevels.Level3Percent,@Model.MaturityLevelDashboardViewModel.OverallMaturityLevels.Level4Percent, "chartOverall", "");
+
+            @foreach(var modelCategory in @Model.MaturityLevelDashboardViewModel.Sections)
+            {
+                string chartName = "chart" + modelCategory.PageNo;
+                var categoryLevels = modelCategory.QuestionCategoryLevels;
+                 @:drawChart(@categoryLevels.Level1Percentage, @categoryLevels.Level2Percentage, @categoryLevels.Level3Percentage,@categoryLevels.Level4Percentage,"@chartName","@modelCategory.CategoryName")
+            }
+        }
+
+        function drawOrgChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Name');
+            data.addColumn('string', 'Manager');
+            data.addColumn('string', 'ToolTip');
+
+            // For each orgchart box, provide the name, manager, and tooltip to show.
+            data.addRows([
+                [{ 'v': '@Model.ExecutiveMayor', 'f': '<b>@Model.ExecutiveMayor</b><div>Executive Mayor</div>' },
+                    '', 'Executive Mayor'],
+                [{ 'v': '@Model.CityManager', 'f': '<b>@Model.CityManager</b><div>City Manager</div>' },
+                    '@Model.ExecutiveMayor', 'City Manager'],
+                [{ 'v': '@Model.COO', 'f': '<b>@Model.COO</b><div>COO</div>' },
+                    '@Model.ExecutiveMayor', 'COO'],
+                [{ 'v': '@Model.DirectorHR', 'f': '<b>@Model.DirectorHR</b><div>Director HR</div>' },
+                    '@Model.ExecutiveMayor', 'Director HR'],
+            ]);
+
+            // Create the chart.
+            var chart = new google.visualization.OrgChart(document.getElementById('orgChart'));
+            // Draw the chart, setting the allowHtml option to true for the tooltips.
+            chart.draw(data, { 'allowHtml': true });
+        }
+
+        function drawPieChart(permSect5657,fixedTerm5657,permNonSect5657,fixedTermNon5657,others) {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Category', '% of employees'],
+                ['Permanent sect. 56 & 57', permSect5657],
+                ['Fixed-term  56 & 57', fixedTerm5657],
+                ['Permanent  non-sect 56 & 57', permNonSect5657],
+                ['Fixed-term non-sect 56 & 57', fixedTermNon5657],
+                ['Others not on payroll', others]
+            ]);
+            var options = {
+                pieSliceText: "value",
+/*                legend: "none",*/
+                is3D: true,
+                backgroundColor: "transparent",
+                chartArea: { width: "100%", height: "65%" },
+                //legend: {
+                //    position: 'labeled',
+                //    labeledValueText: 'both',
+                //    textStyle: {
+                //        color: 'black',
+                //        fontSize: 14
+                //    }
+                //}
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
+
+        function drawChart(level1Val, level2Val, level3Val, Level4Val, chartID, chartTitle) {
+            var data = google.visualization.arrayToDataTable([
+                ["Percent", "Level", { role: "style" }, { role: 'annotation' } ],
+                ["Level 1", level1Val / 100, "red", level1Val],
+                ["Level 2", level2Val / 100, "orange", level2Val],
+                ["Level 3", level3Val / 100, "yellow", level3Val],
+                ["Level 4", Level4Val / 100, "LawnGreen", Level4Val]
+            ]);
+            var view = new google.visualization.DataView(data);
+
+
+            var options = {
+                chartArea: {
+                    // leave room for y-axis labels
+                    width: '80%'
+                },
+                legend: {
+                    position: 'top'
+                },
+                title: chartTitle,
+                titleTextStyle: {
+                    color: "white"
+                },
+                bar: { groupWidth: "70%" },
+                legend: { position: "none" },
+                backgroundColor: {
+                    fill: "white",
+                    stroke: 'none',
+                    strokeWidth: 3
+                },
+                vAxis: {
+                    format: "#.#%",
+                    maxValue: 100,
+                    viewWindow: { min: 0, max: 1 },
+                    textStyle: {
+                        color: "black"
+                    }
+                },
+                hAxis: {
+                    textStyle: {
+                        color: "black"
+                    }
+                },
+                tooltip: {
+                    trigger: "none"
+                }
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById(chartID));
+            chart.draw(view, options);
+        }
+
+    </script>
+
+}
+

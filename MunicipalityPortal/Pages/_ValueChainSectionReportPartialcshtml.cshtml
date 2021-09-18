@@ -1,0 +1,61 @@
+﻿
+@model SALGASharedReporting.ViewModels.MaturityLevelSectionViewModel
+
+@{ 
+    var sectioNo = Model.PageNo + 2;
+}
+<b>5.@sectioNo @Model.CategoryName</b>
+
+<div class="row">
+    @{string chartName = "chart" + Model.PageNo;}
+    <div class="mb-5 mx-auto d-block" id="@chartName" style="width:450px;height:400px;margin-top:3em;">
+
+    </div>
+    <div class="text-center" style="margin-top:3em;">
+        <b>@Model.CategoryName Maturity Level : @Model.QuestionCategoryLevels.MaturityLevel</b>
+    </div>
+</div>
+
+
+<div class="mt-4" >
+    <div class="container-fluid">
+        <table class="table table-bordered d" style="padding-top:20px;">
+            <thead style="border-bottom: 1px solid">
+                <tr>
+                    <th class="col-3">Practices or artefacts in place contributing to higher levels of maturity</th>
+                    <th class="col-3">Practices or artefacts requiring attention to improve the currentlevel of maturity</th>
+                    <th class="col-2">Comments</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var question in Model.QuestionAnswers)
+                    {
+                        <tr>
+                            <td>
+                                @if (question.AnswerTypeDisplayString == "yes")
+                                {
+                                    @question.Note;
+                                }
+                            </td>
+                            <td>
+                                @if (question.AnswerTypeDisplayString == "partially")
+                                {
+                                    @question.Note;
+                                }
+                                else
+                                @if (question.AnswerTypeDisplayString == "no")
+                                {
+
+                                    @question.Note;
+                                }
+                            </td>
+                            <td>@question.Comments</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>

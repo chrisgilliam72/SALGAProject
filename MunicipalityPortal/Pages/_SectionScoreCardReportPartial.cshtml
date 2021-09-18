@@ -1,0 +1,55 @@
+﻿@model SALGASharedReporting.ViewModels.MaturityLevelSectionScorecardViewModel
+
+
+    <div class="card-body" style="line-height: 1">
+        <table class="table table-bordered">
+            <thead>
+                <tr style="background-color: #d4d4d4;">
+                    <th>Q#</th>
+                    <th>Level 1</th>
+                    <th>Level 2</th>
+                    <th>Level 3</th>
+                    <th>Level 4</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var modelRow in Model.Rows)
+                {
+                    <tr>
+                        <td>@modelRow.QuestionNo</td>
+                        <td>@modelRow.Scores[0]</td>
+                        <td>@modelRow.Scores[1]</td>
+                        <td>@modelRow.Scores[2]</td>
+                        <td>@modelRow.Scores[3]</td>
+                    </tr>
+                }
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td># questions</td>
+                    <td>@Model.NoQuestionsQ1</td>
+                    <td>@Model.NoQuestionsQ2</td>
+                    <td>@Model.NoQuestionsQ3</td>
+                    <td>@Model.NoQuestionsQ4</td>
+                </tr>
+                <tr>
+                    <td>score</td>
+                    <td>@Model.Score(1)</td>
+                    <td>@Model.Score(2)</td>
+                    <td>@Model.Score(3)</td>
+                    <td>@Model.Score(4)</td>
+                </tr>
+                <tr>
+                    <td>%score</td>
+                    <td>@Model.PercentScore(1)</td>
+                    <td>@Model.PercentScore(2)</td>
+                    <td>@Model.PercentScore(3)</td>
+                    <td>@Model.PercentScore(4)</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="card-footer" style="padding:15px!important;">
+        <b>Function Level: @Model.FunctionalLevel</b>
+    </div>

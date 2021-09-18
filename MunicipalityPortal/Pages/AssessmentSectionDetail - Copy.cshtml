@@ -1,0 +1,93 @@
+﻿@page
+@model MunicipalityPortal.Pages.AssessmentSectionDetailModel
+
+<form method="post" enctype="multipart/form-data">
+    <input asp-for="@Model.SectionNo" type="hidden" />
+    <div class="card mt-1 mb-5">
+        <div class="card-header bg-dark">
+            <div class="card-title text-light">
+                <a class="text-light"> @Model.SectionTitle</a>
+
+<<<<<<< HEAD
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tr>
+                    <th class="col-6"> Question</th>
+                    <th> Response</th>
+                    <th> Evidence</th>
+                    <th> Comments</th>
+                </tr>
+=======
+<h2 style="font-size:15px; margin-bottom: 50px; color:dimgray; text-transform:uppercase;">@Model.SectionTitle</h2>
+
+<div class="card mt-1 mb-5">
+    <div class="card-header">
+        <div class="card-title text-light">
+            <a class="text-light"> @Model.SectionTitle</a>
+
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <tr>
+                <th class="col-6 t-header"  style="background-color:#272D3E; color:#ffffff"> Question</th>
+                <th style="background-color:#272D3E; color:#ffffff">Response</th>
+                <th style="background-color:#272D3E; color:#ffffff">Evidence</th>
+                <th style="background-color:#272D3E; color:#ffffff">Comments</th>
+            </tr>
+>>>>>>> bcf2c6937fa42476e64ea3d882d82c37cac4abe7
+
+                @{
+                    var pageQuestions = Model.ListQuestionsAnswers;
+                    int pageIndex = 0;
+                    foreach (var pageQuestion in pageQuestions)
+                    {
+                        int questionNo = pageQuestion.QuestionNo;
+                        <tr>
+                            <td>
+                                <input asp-for="@Model.ListQuestionsAnswers[pageIndex].QuestionID" type="hidden" />
+                                <input asp-for="@Model.ListQuestionsAnswers[pageIndex].QuestionNo" type="hidden" />
+                                <input asp-for="@Model.ListQuestionsAnswers[pageIndex].Question" type="hidden" />
+                                <input asp-for="@Model.ListQuestionsAnswers[pageIndex].PageNo" type="hidden" />
+                                @Model.ListQuestionsAnswers[pageIndex].Question
+                            </td>
+                            <td>
+
+                                <select asp-for="@Model.ListQuestionsAnswers[pageIndex].AnswerType" asp-items="@Model.ListResponseTypes">
+                                    <option value="">Answer</option>
+                                </select>
+                                <span asp-validation-for="@Model.ListQuestionsAnswers[pageIndex].AnswerType" class="text-danger" />
+                            </td>
+                            <td>
+
+                                <div>
+                                    <input asp-for="@Model.ListQuestionsAnswers[pageIndex].EvidenceFile" class="custom-file-input form-control" type="file" accept="image/*" />
+                                    @if (!String.IsNullOrEmpty(pageQuestion.FileName))
+                                    {
+                                        <span>Current file = @pageQuestion.FileName</span>
+                                    }
+                                </div>
+
+                            </td>
+                            <td>
+                                <textarea asp-for="@Model.ListQuestionsAnswers[pageIndex].Comment" type="text" style="height:100px"></textarea>
+                            </td>
+                        </tr>
+                        pageIndex++;
+                    }
+                }
+
+            </table>
+        </div>
+        <div class="card-footer d-flex">
+            <button type="submit" value="answers" class="btn btn-primary mx-auto">Submit</button>
+            <a asp-page="./AssessmentQuestions" class="btn btn-secondary mx-auto">Back</a>
+        </div>
+    </div>
+</form>
+
+
+
+

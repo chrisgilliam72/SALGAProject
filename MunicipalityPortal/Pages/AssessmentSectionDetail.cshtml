@@ -1,0 +1,160 @@
+﻿@page
+@model MunicipalityPortal.Pages.AssessmentSectionDetailModel
+<!-- B A C K  B U T T O N -->
+<div class="back-btn-container">
+    <a asp-page="./AssessmentQuestions" class="back-btn">
+        Back
+    </a>
+</div>
+<h3 style="margin-bottom:2em;margin-left: 2em;"> @Model.SectionTitle</h3>
+<form method="post" enctype="multipart/form-data">
+    <input asp-for="@Model.IsApprover" type="hidden" />
+    <input asp-for="@Model.SectionNo" type="hidden" />
+    <input asp-for="@Model.SectionTitle" type="hidden" />
+    <div class="card mt-1 mb-5">
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tr>
+                    <th style="background-color:#272D3E; color:#ffffff">Q#</th>
+                    <th class="col-6 t-header" style="background-color:#272D3E; color:#ffffff"> Assessment Question</th>
+                    <th style="background-color:#272D3E; color:#ffffff">Response</th>
+                    <th style="background-color:#272D3E; color:#ffffff">Evidence</th>
+                    <th style="background-color:#272D3E; color:#ffffff">Comments</th>
+                    @if (Model.IsApprover)
+                    {
+                        <th style="background-color:#272D3E; color:#ffffff"> Approver Comments</th>
+                    }
+
+                </tr>
+
+                @{
+                    int pageIndex = 0;
+                    var pageQuestions = Model.ListQuestionsAnswers;
+                    foreach (var pageQuestion in pageQuestions)
+                    {
+                        String rowStyle = "";
+                        int questionNo = pageQuestion.QuestionNo;
+                        if (pageQuestion.IsRejected)
+                            rowStyle = "background-color:orangered";
+                        <tr style="@rowStyle">
+                            <td style="border-bottom: 2px dotted #272D3E; border-right: 2px dotted #272D3E;"> @Model.ListQuestionsAnswers[pageIndex].QuestionNo</td>
+                            <td style="border-bottom: 2px dotted #272D3E; border-right: 2px dotted #272D3E;">
+                                <input asp-for="@Model.ListQuestionsAnswers[pageIndex].AnswerID" type="hidden" />
+                                <input asp-for="@Model.ListQuestionsAnswers[pageIndex].QuestionID" type="hidden" />
+                                <input asp-for="@Model.ListQuestionsAnswers[pageIndex].EvidenceID" type="hidden" />
+                                <input asp-for="@Model.ListQuestionsAnswers[pageIndex].FileBlobName" type="hidden" />
+                                <input asp-for="@Model.ListQuestionsAnswers[pageIndex].QuestionNo" type="hidden" />
+                                <input asp-for="@Model.ListQuestionsAnswers[pageIndex].Question" type="hidden" />
+                                <input asp-for="@Model.ListQuestionsAnswers[pageIndex].PageNo" type="hidden" />
+                                <input asp-for="@Model.ListQuestionsAnswers[pageIndex].FileUrl" type="hidden" />
+                                <input asp-for="@Model.ListQuestionsAnswers[pageIndex].FileName" type="hidden" />
+                                <input asp-for="@Model.ListQuestionsAnswers[pageIndex].HasCustomResponses" type="hidden" />
+                                @Html.Raw(@Model.ListQuestionsAnswers[pageIndex].Question)
+                            </td>
+                            <td style="border-bottom: 2px dotted #272D3E; border-right: 2px dotted #272D3E;">
+                                @if (Model.CanEdit)
+                                {
+                                    @if (@Model.ListQuestionsAnswers[pageIndex].HasCustomResponses)
+                                    {
+                                        <select asp-for="@Model.ListQuestionsAnswers[pageIndex].CustomResponse" asp-items="@Model.ListQuestionsAnswers[pageIndex].ListCustomResponseTypes" class="longtextCombo">
+                                            <option value="" title="@Model.ListQuestionsAnswers[pageIndex].CustomResponse">Answer</option>
+                                        </select>
+
+                                        <span asp-validation-for="@Model.ListQuestionsAnswers[pageIndex].CustomResponse" class="text-danger" />
+                                    }
+                                    else
+                                    {
+
+                                        @if (Model.ListQuestionsAnswers[pageIndex].AllowPartial)
+                                        {
+                                            <select asp-for="@Model.ListQuestionsAnswers[pageIndex].AnswerType" asp-items="@Model.ListResponseTypes">
+                                                <option value="">Answer</option>
+                                            </select>
+
+                                            <span asp-validation-for="@Model.ListQuestionsAnswers[pageIndex].AnswerType" class="text-danger" />
+                                        }
+                                        else
+                                        {
+                                            <select asp-for="@Model.ListQuestionsAnswers[pageIndex].AnswerType" asp-items="@Model.ListResponseTypesNoPartial">
+                                                <option value="">Answer</option>
+                                            </select>
+
+                                            <span asp-validation-for="@Model.ListQuestionsAnswers[pageIndex].AnswerType" class="text-danger" />
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    @Model.ListQuestionsAnswers[pageIndex].AnswerType
+                                }
+                            </td>
+                            <td style="border-bottom: 2px dotted #272D3E; border-right: 2px dotted #272D3E;">
+
+                                <div>
+                                    @if (!Model.IsApprover && Model.CanEdit)
+                                    {
+                                        <input asp-for="@Model.ListQuestionsAnswers[pageIndex].EvidenceFile" class="custom-file-input form-control" type="file" accept="*" />
+                                    }
+
+                                    @if (!String.IsNullOrEmpty(pageQuestion.FileName))
+                                    {
+                                        <div class="col">
+                                            @*<a href="@Model.ListQuestionsAnswers[pageIndex].FileUrl"> @Model.ListQuestionsAnswers[pageIndex].FileName</a>*@
+                                            <a href="@Url.Page("AssessmentSectionDetail", "DownloadEvidenceFile", new {blobName= @Model.ListQuestionsAnswers[pageIndex].FileBlobName })">@Model.ListQuestionsAnswers[pageIndex].FileName</a>
+                                        </div>
+                                        @if (Model.CanEdit)
+                                        {
+                                            <div class="col form-check-inline">
+                                                <label class="form-check-label">Remove:</label>
+                                                <input class="form-check-input" asp-for="@Model.ListQuestionsAnswers[pageIndex].DeleteEvidenceFile" type="checkbox">
+                                            </div>
+                                        }
+                                    }
+                                </div>
+
+                            </td>
+                            <td style="border-bottom: 2px dotted #272D3E;">
+                                @if (Model.CanEdit)
+                                {
+                                    <textarea asp-for="@Model.ListQuestionsAnswers[pageIndex].Comment" type="text" style="height:100px"></textarea>
+                                }
+                                else
+                                {
+                                    <textarea asp-for="@Model.ListQuestionsAnswers[pageIndex].Comment" type="text" style="height:100px" readonly="readonly"></textarea>
+                                }
+                            </td>
+                            @if (Model.IsApprover)
+                            {
+                                <td>
+                                    @if (Model.CanEdit)
+                                    {
+                                        <textarea asp-for="@Model.ListQuestionsAnswers[pageIndex].ApproverComment" type="text" style="height:100px"></textarea>
+                                    }
+                                    else
+                                    {
+                                        <textarea asp-for="@Model.ListQuestionsAnswers[pageIndex].ApproverComment" type="text" style="height:100px" readonly="readonly"></textarea>
+                                    }
+                                </td>
+
+                            }
+                        </tr>
+                        pageIndex++;
+                    }
+                }
+
+            </table>
+        </div>
+        <div class="card-footer-assessQ">
+            <a asp-page="./AssessmentQuestions" class="btn btn-score">Back</a>
+            @if (Model.CanEdit)
+            {
+                <button type="submit" value="answers" class="btn btn-regular">Save</button>
+            }
+
+        </div>
+    </div>
+</form>
+
+
+
+

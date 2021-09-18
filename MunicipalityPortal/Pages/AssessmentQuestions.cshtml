@@ -1,0 +1,143 @@
+﻿@page
+@model SALGAWeb.Pages.AssessmentQuestionsModel
+@using SALGADBLib
+
+<!-- T O P  B A R -->
+<div class="topBar-assessment">
+    <h2 style="font-size: 30px; margin-bottom: 50px; margin-left: 2em; display: inline-block; padding-top: 20px; margin-top: 20px;">SELF ASSESSMENT</h2>
+    <!-- Control buttons -->
+    <form method="post" class="control-buttons" style=" padding-top: 20px; margin-top: 20px;">
+        <input asp-for="@Model.ApprovalMode" type="hidden" />
+        @{
+            if (Model.ApprovalMode)
+            {
+                if (Model.IsApproved)
+                {
+                    <button type="submit" value="capturerSubmitted" class="btn btn-control" disabled>Approved </button>
+                }
+                else
+                {
+                    if (Model.IsSubmitted)
+                    {
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        @if (!Model.HasRejectSections)
+                        {
+                            <button type="submit" value="approve" asp-page-handler="Approve" class="btn btn-control">Approve</button>
+                        }
+
+                        <button type="submit" value="reject" asp-page-handler="Reject" class="btn btn-secondary">Request Re-Assessment</button>
+                    </div>
+                    }
+
+                }
+
+            }
+            else
+            {
+                if (Model.IsApproved)
+                {
+                    <button type="submit" value="capturerSubmitted" class="btn btn-control" disabled>Approved </button>
+                }
+                else
+                if (Model.IsSubmitted)
+                {
+                    <button type="submit" value="capturerSubmitted" class="btn btn-control" disabled>Pending review</button>
+                }
+
+                else
+                {
+                    <div class="d-grid d-md-flex justify-content-md-end">
+
+                        @{ if (Model.CanSubmit)
+                            {
+                                <button type="submit" value="answers" asp-page-handler="Submitted" class="btn btn-control">Submit Assessment</button>
+                            }
+                            else
+                            {
+                                <button type="submit" value="capturerSubmitted" class="btn btn-control" disabled>Submit Assessment</button>
+                            }
+                        }
+
+                    </div>
+                }
+
+            }
+        }
+    </form>
+</div>
+
+<!-- A S S E S S M E N T  C A R D S -->
+@{
+    int pageCount = Model.ListSections.Count;
+    for (int pageNo = 0; pageNo < pageCount; pageNo += 4)
+    {
+        <div class="row">
+            @{
+                for (int i = 0; i < 4; i++)
+                {
+                    string progressClass = @Model.ListSections[pageNo + i].IsComplete ? "status-indicator-complete" : "status-indicator-incomplete";
+                    <div class="col-3">
+                        <div class="card-assessments-dash">
+                            @{
+                                var cardID = "CardNo" + pageNo;
+                                var pageTitle = Model.ListSections[pageNo + i].Title;
+                                var cardNo = pageNo + i + 1;
+                            }
+
+                            <div class="card-header-assdash bg-assess">
+                                <div class="card-title-dash">
+                                    @pageTitle
+                                </div>
+                                <i class="@Model.ListSections[pageNo + i].IconPath dash-card-icon"></i>
+                            </div>
+                            <div class="card-body-assessments">
+                                <div class="row">
+                                    <p><b>Status</b></p>
+
+                                    @if (Model.ListSections[pageNo + i].IsComplete)
+                                    {
+                                        <div class="@progressClass">
+                                            Complete<span class="percentage-area">@Model.ListSections[pageNo + i].Percent %</span>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="@progressClass ">
+                                            Incomplete<span class="percentage-area">@Model.ListSections[pageNo + i].Percent %</span>
+                                        </div>
+                                    }
+
+                                </div>
+
+                            </div>
+                            @if (Model.CanEdit)
+                            {
+                                <div class="assess-edit">
+                                    <a asp-page="/AssessmentsectionDetail" asp-route-SectionNo="@cardNo" class="edit-assessment">Edit</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="assess-edit">
+                                    <a asp-page="/AssessmentsectionDetail" asp-route-SectionNo="@cardNo" class="edit-assessment">View</a>
+                                </div>
+                            }
+
+                            @if (@Model.ListSections[pageNo + i].IsRejected)
+                            {
+
+                                <div class="d-grid d-md-flex justify-content-md-end">
+                                    <i class="fa fa-star"></i>
+
+                                </div>
+
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    }
+}
+
+

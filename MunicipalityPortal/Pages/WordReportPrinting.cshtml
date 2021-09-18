@@ -1,0 +1,916 @@
+﻿
+@page
+@model MunicipalityPortal.Pages.WordReportModelPrinting
+@{
+   Layout = null;
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+<div id="start"></div>
+<div class="col WordSection1" style="background-color: #ffffff !important; border-radius: 3px; padding:50px; ">
+    <section style="padding:20px;font-size: 14px;">
+        <p align=center style='text-align:left;line-height:150%; border-bottom: 1px dotted black;padding-bottom: 2em;'>
+            <img src="~/Images/logo.png" width="150" />
+            @if (Model.Municipality != null)
+            {
+                <b>
+                    <span style='font-size:18px;line-height:50%;color:#000000; margin-left: 12%;'>
+                        @Model.Municipality.Name @Model.Municipality.MunicipalCatagory.Catagory Municipality
+                    </span>
+                </b>
+            }
+        </p>
+        <span style='font-size:16.0pt;line-height:150%; color:#fff;'>
+            Feedback
+            Report
+        </span>
+        <!-- T A B L E  O F  C O N T E N T S -->
+        <p class="TOC-toggle" onclick="TOCtoggle()" style="color: #f46d16;">
+            <b>Table Of Contents</b></>
+            <div id="toc" class="TOC" style="display:none;">
+                <ol>
+                    <li><a href="#intro">Introduction</a></li>
+                    <li><a href="#profilingOB">The Profiling Tool</a></li>
+                    <li><a href="#postProfiling">Post-Profiling Objectives</a></li>
+                    <li>
+                        <a href="#methodology">The profiling approach and methodology</a>
+                        <ol>
+                            <li>
+                                <a href="#Sources">Sources that informed the development of the questionnaire</a>
+                            </li>
+                            <li>
+                                <a href="#VChain">HRM&D Value Chain Model </a>
+                            </li>
+                            <li>
+                                <a href="#maturityModel">HRM&D Maturity Model</a>
+                            </li>
+                            <li>
+                                <a href="#OSources">Other sources </a>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#framework">Framework for calculating the maturity level rating </a>
+                    </li>
+                    <li>
+                        <a href="#demographics">Municipal demographic information</a>
+                        <ol>
+                            <li><a href="#demographic2">Municipal demographic information</a></li>
+                        </ol>
+
+                    </li>
+                    <li><a href="#conclusion">Conclusion and recommendations</a></li>
+                </ol>
+            </div>
+    </section>
+    <section style="padding:10px;color: #242424;font-size: 14px;" class="other-pages">
+        <h3>Introduction</h3>
+        <p style="font-size:14px;">
+
+            The
+            Municipal human capital developmental profiling project was initiated by SALGA
+            in response to the development and approval of a HRM&amp;D blueprint primarily
+            aimed at repositioning human capital management in municipalities to better
+            contribute the realization of developmental and service delivery goals. The
+            additional contribution envisaged in this repositioning is improved levels of
+            professionalism and professionalisation in local government such that
+            municipalities can fulfil their constitutional obligations as organs of state
+            that are citizens centric, customer responsive, developmental and impartial.
+            The strategy blueprint was in itself an intervention in response to various
+            forms of assessments and audits, such as LGTAS, HR Status quo survey and the period
+            Auditor General Audit findings that identified a number of key findings (and in
+            certain instances of a repeat nature) regarding<br />
+
+            the state of Human Capital Management (HCM) in
+            municipalities across South Africa.  Some of these finding were:
+
+            <ol>
+                <li>
+                    High incidence of
+                    irregular or inappropriate appointments.
+                </li>
+                <li>
+                    Low human resource
+                    and financial capacity.
+                </li>
+                <li>
+                    Poor skills
+                    development programmes.
+                </li>
+                <li>
+                    High turnover and
+                    vacancy rates.
+                </li>
+                <li>
+                    Lack of effective
+                    performance management.
+                </li>
+                <li>
+                    Ineffective
+                    leadership and institutional management.
+                </li>
+                <li>
+                    Weak
+                    intergovernmental support and oversight.
+                </li>
+                <li>
+                    Lack of a
+                    comprehensive information repository.
+                </li>
+                <li>
+                    Lack of a coherent
+                    policy framework for skills development.
+                </li>
+                <li>
+                    Adverse audit
+                    findings.
+                </li>
+            </ol>
+        </p>
+        <p>
+            In
+            addition to the above case for change, there was also no single, real view of
+            the state of maturity of HCM practices within municipalities.  As such, the
+            support that SALGA provides is based on perceived or ad hoc needs resulting in
+            the support provided not necessarily being holistic and integrated, thus often
+            responsive.
+        </p>
+        <p id="profilingOB">
+            <b>
+                <span>
+                    2.
+                </span>
+            </b><b>
+                <h4>The profiling objectives</h4>
+            </b>
+        </p>
+        <p>
+            This
+            profiling exercise is an attempt to meet the municipality where it’s at in
+            terms of current HR practices and to:
+            <ol>
+                <li>
+                    Establish a shared
+                    understanding of the <span>human capital management </span>maturity
+                    levels.
+                </li>
+                <li>
+                    Determine the gap
+                    between the current and desired state of maturity.
+                </li>
+                <li>
+                    Identify the
+                    support required to evolve the municipal
+                    human capital management function to a developmental state of excellence.
+                </li>
+                <li>
+                    Enable the
+                    development of a roadmap and vehicle through which the
+                    human capital management function strategically supports the organisation’s
+                    drive towards being in harmony with its community, partners and environment
+                </li>
+                <li>
+                    Enable the professionalisation of thehuman capital management
+                    function and in turn the entire organisation.
+                </li>
+            </ol>
+        </p>
+        <p>
+            It
+            is of utmost importance to emphasise that this is not a process with punitive
+            outcome and to maintain the integrity of the responses it is requested that
+            this report and the maturity levels it articulates, does not become a
+            performance management mechanism, but rather a platform for discussion on
+            improving Municipal Human Resource Management and ultimately Municipal service
+            delivery to the community it serves.
+        </p>
+        <p id="postProfiling" class="other-pages">
+            <div style="page-break-after: always"></div>
+            <b>
+                <span>
+                    3.
+                </span>
+            </b><b>
+                <h4>Post-profiling activities</h4>
+            </b>
+        </p>
+        <p>
+            After
+            the profiling exercise is completed, the following activities will commence:
+            <ol>
+                <li>
+                    Analysis of the
+                    information collected will be undertaken and a report drafted;
+                </li>
+                <li>
+                    A recommended
+                    improvement plan will be compiled and presented to Council, MAYCO, and MANCOM;
+                </li>
+                <li>
+                    Role Delineation:
+                    Municipality versus SALGA role;
+                </li>
+                <li>
+                    Entering into a
+                    Service Level Agreement to institutionalise the transformation programme;
+                </li>
+                <li>
+                    Resource
+                    Allocation;
+                </li>
+                <li>
+                    Monitoring and
+                    Evaluation.
+                </li>
+                <li>
+                    Real-Time delivery
+                    of SALGA products and services to municipalities;
+                </li>
+                <li>
+                    Intelligence based
+                    multidisciplinary support provided to municipalities;
+                </li>
+                <li>
+                    Increased
+                    availability of a battery of norms and standards;
+                </li>
+                <li>
+                    A professionalised
+                    Local Government System;
+                </li>
+                <li>
+                    An effective cadre
+                    of Local Government leadership and practitioners that are a resource to the
+                    sector;
+                </li>
+                <li>
+                    Creation of SALGA
+                    value adding products e.g. a hub for competency assessments, RPL etc.
+                </li>
+            </ol>
+        </p>
+        <p id="methodology">
+            <b>
+                <span>
+                    4.
+                </span>
+            </b><b>
+                <h4>The profiling approach and methodology</h4>
+            </b>
+        </p>
+        <p>
+            Participating
+            municipalities where encouraged to respond truthfully to the questions as this
+            is a qualitative developmental evaluation without punitive outcome.&nbsp;
+            Evidence was requested and reviewed but this processes is by no means a
+            substantive audit and should thus not be regarded as such.&nbsp; This
+            Developmental Capability Maturity Profiling process was geared at assessing
+            maturity in a staged fashion based on best practice in the Human Capital
+            function and is intended to become the base of assisting municipal entities in
+            improving their respective maturity ratings over time.
+        </p>
+        <p>
+            The
+            profiling approach and methodology consists of a number of sources, instruments,
+            maturity indexes, the HRM&amp;D value chain, interactive engagements between
+            SALGA and municipalities, pre/post profiling activities and the profiling
+            questionnaire and maturity rating and reporting tool.
+        </p>
+        <p>
+            The
+            key instrument is the profiling questionnaire and supporting maturity rating
+            and reporting tool.  Various sources informed the development of the profiling
+            questionnaire, which in turn results in a maturity rating based on the
+            responses received from a face-to-face interview conducted by SALGA
+            representatives with representatives predominantly from the municipality’s HCM
+            function.
+        </p>
+        <p id="Sources">
+            <b>
+                <span>
+                    4.1
+                    &nbsp;
+                </span>
+            </b><b>
+                <h4>
+                    Sources
+                    that informed the development of the questionnaire
+                </h4>
+            </b>
+        </p>
+        <p>
+            <img class="report-images" id="Picture 1"
+                <img src="~/Images/SALGAReportPoint41.JPG" />
+        </p>
+        <p id="VChain">
+            <b>
+                <h4>
+                    HRM&amp;D
+                    Value Chain Model
+                </h4>
+            </b>
+        </p>
+        <p>
+            Questions
+            was formulated around each of the various elements of the municipal HRM&amp;D
+            value chain (Hereafter referred to as HRM&amp;D functions) defined in the
+            National HRM&amp;D Strategy – Blueprint for Local Government
+            <mark style='background:yellow'>(Feb. 2013) </mark> to
+            provide a profile of the individual functions’ level of maturity.
+        </p>
+        <div style="page-break-after: always"></div>
+        <p id="maturityModel">
+            <b>
+                <h4>HRM&amp;D Maturity Model</h4>
+            </b>
+        </p>
+        <p>
+            The
+            HRM&amp;D maturity model was adapted from the Local Government maturity model
+            contained in the National HRM&amp;D Strategy – Blueprint for Local Government
+            (Feb. 2013) to provide a framework that consistently tests for various states
+            of HR practice typically associated with different levels of maturity.
+        </p>
+        <p>
+            <img class="report-images" id="Picture 12"
+                 src="/Images/salgareportimage2.jpg">
+        </p>
+        <p id="OSources" class="other-pages">
+            <b>
+                <h4>
+                    Other
+                    sources
+                </h4>
+            </b>
+            <ol>
+                <li>
+                    The LG Professionalisation
+                    Framework
+                </li>
+                <li>
+                    Municipal
+                    Assessment Tool (Department of Performance Monitoring and Evaluation)
+                </li>
+                <li>
+                    QBIT Standard
+                    Integrated People Practices Questionnaire (SIPP©)
+                </li>
+                <li>
+                    QBIT Data Centric
+                    Model (DCM©)
+                </li>
+
+            </ol>
+        </p>
+        <p id="framework">
+            <b>
+                <span>
+                    4.2
+                    &nbsp;
+                </span>
+            </b><b>
+                <h4>
+                    Framework
+                    for calculating the maturity level rating
+                </h4>
+            </b>
+        </p>
+        <p>
+            Each
+            of the questions in the questionnaire was aligned to a state of maturity
+            defined in the maturity model described above.  The rating of each element of
+            the HRM&amp;D Value Chain was based on the percentage of questions, answered
+            positively (“Yes” or “Partially”) that corresponds with a specific level of
+            maturity.  If a score higher than 75% was obtained on a specific maturity level,
+            the individual function was rated on that level, provided that a minimum of 75%
+            was obtained on all preceding maturity levels.  For example, if a function
+            scored 75% or more on Level 2, a rating of “Level 2” was given, provided that
+            the function also scored 75% or more on level 1.  If level 1 scored for example
+            60%, the function was rated “Level 0”.  Even if enough level 4 type questions
+            was answered positively resulting in a level 4 score of 75% or more, but level
+            1 did not score 75% or more, the function was rated at level 0.
+        </p>
+        <p>
+            This
+            scoring method was done based on the principle that certain fundamentals need
+            to be in place, such as documented policies and processes associated with
+            Level1, to enable consistent repeatable performance, before effective
+            integration and continuous improvement through measurement (Level 3 &amp; 4)
+            could be accomplished in a sustainable manner.
+        </p>
+        <p>
+            The
+            overall rating of the entire HCM function was based on the requirement that 75%
+            (9 out of 12 HRM&amp;D Value Chain Elements) or more of the individual HRM&amp;D
+            value chain elements needed to score 75% or more on a particular maturity level
+            before the overall HCM function could be rated on the corresponding maturity level.
+            The same principle that was used for the individual HRM&amp;D value chain
+            elements’ overall rating, was used for the overall rating of the entire HCM
+            function.
+        </p>
+        <p>
+            As
+            this is a developmental assessment leniency was appropriate and the success
+            rate of 75% was used.&nbsp; This overall process is meant as a developmental
+            process and not as a punitive one.&nbsp; In this way progress made in
+            municipalities is acknowledged but achievement of full maturity at each level
+            is also encouraged.&nbsp;
+        </p>
+    </section>
+    <section style="padding:10px;color: #242424;
+font-size: 14px;">
+        <div style="page-break-after: always"></div>
+        <p id="demographics">
+            <b>
+                <span>
+                    5.1
+                    &nbsp;&nbsp;&nbsp;
+                </span>
+                </span>
+            </b><b>
+                <h4>
+                    Municipal
+                    demographic information
+                </h4>
+            </b>
+        </p>
+        <p>
+            The questionnaire requires certain demographic
+            information that provides an overview of the type and size of the municipality
+            as well as a ratio of HR to other staff and average salary per employee.
+        </p>
+
+        <div class="bad-cards">
+            <partial name="_HRMDTablelReportPartial" model="@Model.HRMDTableViewModel" />
+        </div>
+        <div style="page-break-after: always"></div>
+        <p id="demographic2">
+            <b>
+                <span>
+                    5.2
+                    &nbsp;&nbsp;&nbsp;
+                </span>
+
+            </b><b>
+                <h4>
+                    Municipal
+                    demographic information
+                </h4>
+            </b>
+        </p>
+        <div class="bad-cards other-pages">
+            <partial name="_OverallMaturityLevelReportPartial" model="@Model.MaturityLevelDashboardViewModel" />
+        </div>
+
+        <p>
+            It appears
+            that the HCM function would need to address the following generic maturity
+            requirements to achieve level 2 across
+            all HRM&amp;D Value Chain elements and then address the requirements for the
+            subsequent levels of maturity.
+        </p>
+        <p>
+            Characteristics
+            typically observed at level 1 Maturity:
+            <ol>
+                <li>
+                    Defined and Documented HRM&amp;D artefacts for example: Policies,Procedures,Strategy documents,Plans,Forms and templates.
+                </li>
+                <li>
+                    There is evidence
+                    of consistency / defined patterns of doing things;
+                </li>
+                <li>
+                    Some evidence is found of good HRMD practice;
+                </li>
+            </ol>
+        </p>
+        <p>
+            Characteristics
+            typically observed at level 2 Maturity:
+            <ol>
+                <li>
+                    A certain level of
+                    awareness around HRM&amp;D artefacts exists
+                </li>
+                <li>
+                    HRM&amp;D artefacts
+                    reflect compliance to regulations
+                </li>
+                <li>
+                    The content of
+                    HRM&amp;D artefacts are aligned to good functional HR Practice
+                </li>
+                <li>
+                    Basic data and
+                    operational transactional reporting available
+                </li>
+            </ol>
+        </p>
+        <div style="page-break-after: always"></div>
+        <p>
+            Characteristics
+            typically observed at level 3 Maturity:
+            <ol>
+                <li>
+                    HRM&amp;D artefacts
+                    are reviewed in consultation with appropriately constituted Forums
+                </li>
+                <li>
+                    HRM&amp;D artefacts
+                    are socialised amongst relevant stakeholders
+                </li>
+                <li>
+                    HRM&amp;D data is
+                    interpreted and analysed to provide intelligence
+                </li>
+                <li>
+                    HRM&amp;D
+                    intelligence is used to initiate corrective and preventative action
+                </li>
+                <li>
+                    HRM&amp;D
+                    Functional integration (From planning to Exit Management)
+                </li>
+            </ol>
+        </p>
+        <p>
+            Characteristics
+            typically observed at level 4 Maturity:
+            <ol>
+                <li>
+                    HRM&amp;D
+                    intelligence is used to compare with internal and external benchmarks / targets
+                </li>
+                <li>
+                    Organisational
+                    functions are integrated and strategies are formulated through human capability
+                    and capacity management
+                </li>
+                <li>
+                    Strategies are
+                    integrated and formulated through wisdom obtained from being a learning
+                    organization
+                </li>
+                <li>
+                    The Organisation
+                    is in equilibrium with its community, its partners, the environment
+                </li>
+                <li>
+                    Full
+                    professionalisation is evident in all functions inclusive of Batho Pele as the
+                    way it is; employees are in service of their community as part of their DNA
+                </li>
+                <li>
+                    Continuous
+                    improvement culture using HRM&amp;D intelligence and feedback from stakeholders
+                </li>
+            </ol>
+        </p>
+        <p>
+            From here
+            onwards you will find the individual maturity level rating for each of the 12
+            HRM&amp;D Value Chain elements profiled as well as a list of artefacts or
+            practices that were found to be present in the municipality that contributed to
+            a certain level of maturity and those that would require attention to improve
+            the current level of maturity.
+        </p>
+    </section>
+    <section style="padding:10px;color: #242424;
+font-size: 14px;">
+        @foreach (var modelSection in Model.MaturityLevelDashboardViewModel.Sections)
+        {
+            if (modelSection != null)
+            {
+                <br />
+                <div class="row other-pages">
+                    <div style="page-break-after: always"></div>
+                    <div class="report-injected-charts" style="padding:24px;color: #242424;
+font-size: 14px">
+                        <partial name="_ValueChainSectionReportPartialcshtml" model="@modelSection" />
+                    </div>
+                </div>
+            }
+            else
+            {
+                <span>Model data not available</span>
+            }
+
+        }<br />
+
+        <span>Technology in use: @Model.TechnologyResponse</span>
+
+        <br />
+        <p id="conclusion" class="other-pages">
+            <b>
+                <span>
+                    6.
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </span>
+            </b><b>
+                <h4>
+                    Conclusion
+                    and recommendations
+                </h4>
+            </b>
+        </p>
+        <p>
+            Evaluating maturity in the
+            Human Capital function and addressing next steps for improvement is not a
+            linear process.  This process involves the evaluation of the internal
+            enablement of the Human Capital Function and the Delivery of Human Capital
+            Practices (the Value Chain) to the Organisation separately.  To some extent
+            this separation is artificial but if not done in this format it becomes
+            unnecessarily complex.
+        </p>
+        <p>
+            The Internal Enablement of the Human Capital Function is depicted through:
+        </p>
+        <p>
+            <img class="report-images"
+                 src="/Images/salgareportimage4.jpg" align="middle" hspace=12>
+        </p>
+        <p>
+            The Value Chain items
+            relating to the Human Capital Function has a hierarchy of inter-relationships
+            to consider when rolling them out into the Organisation:
+        </p>
+        <p>
+            <img class="report-images"
+                 src="/Images/salgareportimage5.jpg" align="middle">
+        </p>
+        <p>
+            This diagram implies that
+            certain practices form the foundation of other practices.  Even if all these
+            practices exist in the Organisation; maturity in e.g. Talent Management will
+            only be achieved once maturity in Strategic Planning, Sourcing and Placement
+            and Performance Management is achieved.  This is however invariably linked to
+            the establishment of policy, processes, supporting technology and information
+            reporting.
+        </p>
+        <p>
+            Considering the outcome of
+            the current Municipal Human Capital Developmental Capability Maturity Profiling
+            effort for your municipality the following recommendations can be made to address
+            as a Phase I:
+            <ol>
+                <li>
+                    The
+                    Human Capital Strategy i.e. the strategy containing objectives regarding the
+                    establishment and improvement of HR practices in the municipality must be drawn
+                    up to address the development and implementation of the basic elements as
+                    described below.
+                </li>
+                <li>
+                    The
+                    Organisational Structure must be relevant, up to date and approved to by all
+                    stakeholders reflecting the IDP requirements.
+                </li>
+                <li>
+                    Up to
+                    date Role Profiles and or Job Descriptions must be drawn up reflecting the
+                    outputs and competency requirements of all positions in the Organisational
+                    Structure.  Generic role profiles are preferable to detailed job descriptions.
+                    These documents should be automated in an HR Management system if possible but
+                    must be agreed to by all stakeholders.
+                </li>
+                <li>
+                    These
+                    Role Profiles and Job Descriptions must be graded through an agreed grading
+                    model.  The grade results and related financial implications must be
+                    incorporated in the resource plan. 
+                </li>
+                <li>
+                    An
+                    implementation &amp; resource plan that defines the actions required to appoint
+                    the required number of people possessing the required capabilities at the
+                    appropriate time to fill the vacancies in the Organisational Structure to
+                    enable the achievement of the municipality’s strategic objectives contained in
+                    the IDP and SDBIP.
+                </li>
+                <li>
+                    Structures
+                    and Positional Titles must be updated in payroll.
+                </li>
+                <li>
+                    Basic
+                    costing reports must be available reflecting headcount, grade, and generic- job
+                    profile/descriptor links.
+                </li>
+                <li>
+                    Relevant
+                    policies and processes for the above must be developed and must be legally
+                    compliant.
+                </li>
+                <li>
+                    A clear
+                    effort should be made to engage the work force and related structures on the
+                    process and its outcomes.
+                </li>
+                <li>
+                    Current
+                    efforts pertaining to other practices should be maintained.
+                </li>
+
+            </ol>
+        </p>
+        <div style="page-break-after: always"></div>
+        <p>
+            Phase II: With the above
+            basics in place and continually maintained the following should receive
+            attention:
+            <ol>
+                <li>
+                    Appropriate
+                    sourcing strategies should be developed given the resource plans, role profile
+                    requirements and strategies of the Municipality.
+                </li>
+                <li>
+                    Staff
+                    contracts and induction for all staff members should become a part of the normal
+                    Sourcing process.
+                </li>
+                <li>
+                    Performance
+                    management as a development tool should be socialized across all levels.
+                </li>
+                <li>
+                    Performance
+                    contracts reflecting the role profiles and Organisational Strategic Plans
+                    (SDBIP) must be drawn up and signed with all staff members and regularly
+                    reviewed.
+                </li>
+                <li>
+                    Capability
+                    for development purposes must be assessed.  At this point technical capability
+                    for staff and specialists and behavioral competence of management and
+                    leadership should receive focus.
+                </li>
+                <li>
+                    Appropriate
+                    Capability Development programs must be instituted and effectiveness monitored
+                    in relation to resource plans.
+                </li>
+                <li>
+                    Updated
+                    Human Capital technology with end-to-end process capabilities is recommended.
+                </li>
+                <li>
+                    Relevant
+                    policies and processes for the above must be developed and must be legally
+                    compliant.
+                </li>
+                <li>
+                    A clear
+                    effort should be made engage the work force and related structures on the
+                    process and its outcomes.
+                </li>
+                <li>
+                    HR
+                    Processes efficiencies must be driven through process reports on processing
+                    time, error rates etc.
+                </li>
+                <li>
+                    Current
+                    efforts pertaining to other practices should be maintained.
+                </li>
+            </ol>
+        </p>
+        <p>
+            This process will evolve
+            over time and must take on an Individualised nature by municipality. The above
+            broad focuses did not incorporate very specific operational steps and or
+            political realities at your Municipality.  We propose this to be developed as
+            part of a structured solution development processes involving stakeholders,
+            considering available resources including financial implications.
+        </p>
+    </section>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawCharts);
+
+
+        function drawCharts() {
+
+            drawPieChart(@Model.HRMDTableViewModel.Perm5657,@Model.HRMDTableViewModel.FixedTerm5657,@Model.HRMDTableViewModel.PermNon5657, @Model.HRMDTableViewModel.FixedTermNon5657, @Model.HRMDTableViewModel.Other);
+
+
+            drawChart(@Model.OverallMaturityLevels.Level1Percent, @Model.OverallMaturityLevels.Level2Percent, @Model.OverallMaturityLevels.Level3Percent,@Model.OverallMaturityLevels.Level4Percent, "chartOverall", "Municipality HRM&D Function Overall Maturity Rating");
+
+            @foreach(var modelCategory in @Model.MaturityLevelDashboardViewModel.Sections)
+            {
+                string chartName = "chart" + modelCategory.PageNo;
+                var categoryLevels = modelCategory.QuestionCategoryLevels;
+                 @:drawChart(@categoryLevels.Level1Percentage, @categoryLevels.Level2Percentage, @categoryLevels.Level3Percentage,@categoryLevels.Level4Percentage,"@chartName","@modelCategory.CategoryName")
+            }
+        }
+
+
+        function drawPieChart(permSect5657,fixedTerm5657,permNonSect5657,fixedTermNon5657,others) {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Category', '% of employees'],
+                ['Permanent sect. 56 & 57', permSect5657],
+                ['Fixed-term  56 & 57', fixedTerm5657],
+                ['Permanent  non-sect 56 & 57', permNonSect5657],
+                ['Fixed-term non-sect 56 & 57', fixedTermNon5657],
+                ['others not on payroll', others]
+            ]);
+            var options = {
+                pieSliceText: "value",
+                legend:"none",
+                is3D:true,
+                backgroundColor: "transparent",
+                chartArea : {  width: "100%", height: "65%" },
+                legend: {
+                    position: 'labeled',
+                    labeledValueText: 'both',
+                    textStyle: {
+                        color: 'blue',
+                        fontSize: 14
+                    }
+                }
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
+
+        function drawChart(level1Val, level2Val, level3Val, Level4Val, chartID, chartTitle) {
+            var data = google.visualization.arrayToDataTable([
+                ["Percent", "Level", { role: "style" }],
+                ["Level 1", level1Val / 100, "red",],
+                ["Level 2", level2Val / 100, "orange", ],
+                ["Level 3", level3Val / 100, "yellow",],
+                ["Level 4", Level4Val / 100, "LawnGreen",]
+            ]);
+            var view = new google.visualization.DataView(data);
+
+
+            var options = {
+                chartArea: {
+                    // leave room for y-axis labels
+                    width: '80%'
+                },
+                legend: {
+                    position: 'top'
+                },
+                title: chartTitle,
+                titleTextStyle: {
+                    color:"black"
+                },
+                bar: { groupWidth: "70%" },
+                legend: { position: "none" },
+                backgroundColor: {
+                    fill:"white",
+                    stroke: '#green',
+                    strokeWidth: 3
+                },
+                vAxis: {
+                    format:"#.#%",
+                    maxValue: 100,
+                    viewWindow: { max: 1 },
+                    textStyle :{
+                        color: "black"
+                    }
+                },
+                hAxis: {
+                    textStyle: {
+                        color: "black"
+                    }
+                }
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById(chartID));
+            chart.draw(view, options);
+        }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

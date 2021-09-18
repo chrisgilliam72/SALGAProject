@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "storage1": {
+      "restored": true,
+      "restoreTime": "2021-04-20T09:15:05.854826Z"
+    },
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2021-04-20T09:14:33.4221714Z"
+    }
+  },
+  "parameters": {
+    "storage1.resourceGroupName": {
+      "Name": "storage1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "SALGA"
+    },
+    "storage1.subscriptionId": {
+      "Name": "storage1.subscriptionId",
+      "Type": "subscription",
+      "Value": "4bb576b7-bdd0-4308-aa25-f6b2999c4a22"
+    },
+    "mssql1.subscriptionId": {
+      "Name": "mssql1.subscriptionId",
+      "Type": "subscription",
+      "Value": "4bb576b7-bdd0-4308-aa25-f6b2999c4a22"
+    },
+    "mssql1.resourceGroupName": {
+      "Name": "mssql1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "SALGA"
+    }
+  }
+}

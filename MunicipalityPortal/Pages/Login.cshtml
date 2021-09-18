@@ -1,0 +1,76 @@
+﻿@page
+@model SALGAWeb.Pages.LoginModel
+@{
+}
+
+<div class="container" style=" padding-top: 70px">
+    <div class="row" style="border: 1px solid grey; border-radius: 1px">
+        <div class="col-6" style="right: 0; top: 100px; width: 50%; padding-top: 50px; padding-bottom: 50px; background-image: url('/EmailTemplates/500x500.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center; ">
+            
+        </div>
+        <div class="col-6" style="padding-top: 30px; padding-bottom:200px; padding-left: 20px ; ">
+            <form method="post" id="loginFrm">
+                <div class="login-card" style="width:500px; margin-top:135px">
+
+                    <div class="card-body login">
+                        <label for="IntervieweeDetails.Email" class="form-label">Email</label>
+                        <input name="Email" type="email" asp-for="Email" class="form-control control-login" required />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+
+                        <label for="IntervieweeDetails.Password" class="form-label">Password</label><a asp-page="./ForgotPassword" class="modal-text-link" value="register">Forgot <b>Password?</b></a>
+                        <div class="input-group">
+                            <input name="Password" id="id_password" type="password" asp-for="Password" class="form-control control-login" />
+                            <div class="input-group-append">
+                                <button class="btn" id="id_password" name="password" type="button">
+                                    <i class="far fa-eye" id="togglePassword" ></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">Remember Me</label>
+                            <input id="chkRememberMe" name="RememberMe" type="checkbox" asp-for"RememberMe" class="form-check-input" />
+                        </div>
+
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                        <div class="row mt-3">
+                            <div class="col">
+                                <button type="submit" class="btn crd-tertiary" value="login">
+                                    LOGIN
+                                </button>
+                                <span class="login-instead">
+                                    <a asp-page="./Register" class="crd-secondary" value="register">Create an account</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+
+    <script type="text/javascript">
+
+        $("#loginFrm").submit(function (e) {
+            $("#chkRememberMe").val($("#chkRememberMe").prop("checked"))
+        })
+
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#id_password');
+
+        togglePassword.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
+
+    </script>
+
+}

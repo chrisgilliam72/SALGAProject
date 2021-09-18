@@ -1,0 +1,95 @@
+﻿@using SALGASharedReporting.ViewModels
+@model HRMDTableViewModel
+<div class="row">
+    <div class="col">
+        <br />
+        <div class="card" style="margin-bottom: 2em;">
+            <div class="card-header text-light" style="background-color:#dcc050">
+                <b>Municipality demographics</b>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead></thead>
+                    <tbody>
+                        <tr>
+                            <td class="cell-title">Municipality Name:</td>
+                            <td>@Model.MunicipalityName</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-title">Type of Municipality:</td>
+                            <td>@Model.TypeMunicipality</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-title">Total number of people working for the Municipality:</td>
+                            <td>@Model.NoPeopleEmployed</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-title">Total monthly salary & wage bill:</td>
+                            <td>@Model.TotalWageBill</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-title">Average monthly payment per person:</td>
+                            <td>@Model.AverageMonthlyWagePP</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-title">Number of HRM&D Staff:</td>
+                            <td>@Model.NoHRMDStaff</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-title">HR to rest of staff ratio - 1 HR person for every:</td>
+                            <td>@Model.HRRatio</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-title">HCM Function's position on the Municipal structure:</td>
+                            <td>@Model.HCMFunction</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card" style="margin-top:2em;">
+            <div class="card-header text-light" style="background-color:#ff6a00">
+                <b>Employee volume per employment type</b>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead></thead>
+                    <tbody>
+                        <tr>
+                            <td class="cell-title">Total number of employees in the Municipality:</td>
+                            <td>@Model.NoPeopleEmployed</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-title"> Permanent sect. 56 & 57:</td>
+                            <td>@Model.Perm5657</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-title">Fixed term sect. 56 & 57:</td>
+                            <td>@Model.FixedTerm5657</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-title">Permanent non-sect. 56 & 57:</td>
+                            <td>@Model.PermNon5657</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-title">Fixed term non-sect. 56 & 57:</td>
+                            <td>@Model.FixedTermNon5657</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-title">Other people on payroll, but not on headcount e.g. interns & employees from labour brokers:</td>
+                            <td>@Model.Other</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+
+  
+    <div class="mb-5 mx-auto d-block" id="piechart" style="width:800px;height:500px;border:solid 1px #a8aaa8;border-radius: 3px;">
+
+    </div>
+    </div>
+

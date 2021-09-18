@@ -1,0 +1,45 @@
+﻿
+@model SALGASharedReporting.ViewModels.MaturityLevelDashboardViewModel
+
+
+<div class="row">
+    <div class="mb-5 mx-auto d-block" id="chartOverall" style="width:450px;height:450px;">
+
+    </div>
+</div>
+<p style="margin-top: 2em;margin-bottom:3em;">@Model.Municipality.Name achieved a maturity rating of level @Model.OverallMaturityLevels.MaturityLevel for the entire HCM function. The reason being, that of the 12 HRM&D Value Chain elements profiled, the following achieved the maturity levels as per the table below: </p>
+<div class="row">
+    <div class="col">
+        <div class="card" style="margin-top:3em;">
+            <div class="card-header text-light" style="background-color:#272D3E">
+                <b>Summary of value chain elements achieving the various levels of maturity</b>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Level 0</th>
+                            <th>Level 1</th>
+                            <th>Level 2</th>
+                            <th>Level 3</th>
+                            <th>Level 4</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var row in Model.SectionsMatrix.Rows)
+                        {
+                            <tr>                
+                                <td>@row.Elements[0]</td>
+                                <td>@row.Elements[1]</td>
+                                <td>@row.Elements[2]</td>
+                                <td>@row.Elements[3]</td>
+                                <td>@row.Elements[4]</td>                              
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

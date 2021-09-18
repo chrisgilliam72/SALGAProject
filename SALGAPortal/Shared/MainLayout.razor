@@ -1,0 +1,114 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inherits LayoutComponentBase
+
+<div class="stage-container" id="start">
+    <div id="sidenav" class="sidebar">
+        <NavMenu />
+    </div>
+
+    <div class="main">
+        <div class="top-row px-4">
+            <div class="col">
+                <img src="/images/logo.png" class="dash-nav-logo" />
+            </div>
+            <div class="col">
+                <span>
+                    <b>Welcome @FullName @Autorizationlevel</b>
+                </span>
+            </div>
+            <div class="col">
+                <div class="search-container" >
+                    <input @bind-value="SearchText" type="text" placeholder=" Search.." name="SearchString">
+                    <button type="button" @onclick="SearchClick"><i class="fa fa-search fa-lg" data-bs-toggle="modal" data-bs-target="#idSearchResults"></i></button>
+                </div>
+            </div>
+            @*<div class="row">
+
+            <div class="col-4">
+                <span >
+                    <b>Welcome @FullName @Autorizationlevel</b>
+                </span>
+            </div>
+            <div class="col justify-content-end">
+                <div class="search-container">
+                    <input @bind-value="SearchText" type="text" placeholder=" Search.." name="SearchString">
+                    <button type="button" @onclick="SearchClick"><i class="fa fa-search fa-lg" data-bs-toggle="modal" data-bs-target="#idSearchResults"></i></button>
+                </div>
+            </div>
+        </div>*@
+            @*<span style="padding-left: 20px; left: 100px; position:absolute;">
+            <a class="navbar-brand" href="">
+                <img src="/images/logo.png" class="dash-nav-logo" />
+            </a>
+        </span>
+        <span style="padding-left: 20px; left: 800px; position:absolute;">
+            <b>Welcome @FullName @Autorizationlevel</b>
+        </span>
+
+        <div class="topnav">
+            <div class="search-container">
+                <input @bind-value="SearchText" type="text" placeholder=" Search.." name="SearchString">
+                <button type="button" @onclick="SearchClick"><i class="fa fa-search fa-lg" data-bs-toggle="modal" data-bs-target="#idSearchResults"></i></button>
+            </div>
+        </div>*@
+
+            <!--<ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+    <li>
+        <div class="topnav">
+            <div class="search-container">
+                <form method="get" asp-page="SearchResults">
+                    <input type="text" placeholder=" Search.." name="SearchString">
+                    <button type="submit"><i class="fa fa-search fa-lg"></i></button>
+                </form>
+
+            </div>
+        </div>
+    </li>
+    <li>
+        <div class="">
+            <a class="nav-link-dash nav-item nav-custom-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">-->
+            @*<a class="nav-link nav-item nav-custom-link social dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">*@
+            <!--<img src="images/user.png" class="dash-nav-user-icon" alt="user avatar">
+    </a>
+    <div class="dropdown-menu" aria-labelldropdownedby="dropdownMenuLink">
+        <form method="post" asp-page="Logout">
+            <button class="btn dash-logout" type="submit" value="signout"> &#8594; &nbsp;&nbsp;Log out </button>-->
+            <!-- elements to be added if features are required
+    <a class="dropdown-item-dash" href="tel:+27731328925">&#x263A; &nbsp;&nbsp;Edit profile</a>
+    <a class="dropdown-item-dash" href="https://wa.link/1i78p3">&#9881;&nbsp;&nbsp; Account</a>
+    -->
+            <!--</form>
+                </div>
+            </div>
+        </li>
+    </ul>-->
+        </div>
+
+
+        <div class="content px-4">
+            @Body
+            <a href="#start">
+                <span id="upBTN" class="jumpUp" style="display:none;">
+                    Jump<br />
+                    Up
+                </span>
+            </a>
+        </div>
+
+    </div>
+    <div class="modal fade" id="idSearchResults" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered modal-lg" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Search Results</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <SALGAPortal.Pages.SearchResults SearchResultList="SearchResultsList"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

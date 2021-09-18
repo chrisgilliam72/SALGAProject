@@ -1,0 +1,74 @@
+﻿
+@if (ProvinceData != null)
+{
+<div class="d-flex justify-content-between">
+    <span style="color:#F46D16;font-size:20px;"><b>@ProvinceData.Province</b></span>
+    <div class="assess-edit">
+        <button type="button" @onclick="(()=>OnCommunication())" class="btn btn-primary" style="background-color: #f46d16; border: none; margin-left: 1em;" data-bs-toggle="modal" data-bs-target="#sendComsModal">Communication</button>
+    </div>
+    <div class="modal fade" id="sendComsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <b class="modal-title" id="exampleModalLabel">Send Communication</b>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <AssessmentsCommunication @ref="AssessmentsCommunication" />
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button value="answersSave" class="btn btn-primary" @onclick="(()=>OnSave())" data-bs-dismiss="modal">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <EditForm Model="@ProvinceData">
+        <div style="height:500px;overflow:auto">
+            <table class="table table-bordered table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th>Completed</th>
+                        <th>In Progress</th>
+                        <th>Not Started</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{var allMuniLst = ProvinceData.MunicipalityAllList; }
+                    @foreach (var muniItem in allMuniLst)
+                    {
+                        <tr>
+                            <td>
+                                @if (muniItem.Status == SALGASharedReporting.ViewModels.MunicipalityCompletionStatus.Complete)
+                                {
+                                    <InputCheckbox @bind-Value="muniItem.Selected" />
+                                    <span>@muniItem.Name</span>
+
+                                }
+                            </td>
+                            <td>
+                                @if (muniItem.Status == SALGASharedReporting.ViewModels.MunicipalityCompletionStatus.Incomplete)
+                                {
+                                    <InputCheckbox @bind-Value="muniItem.Selected" />
+                                    <span>@muniItem.Name</span>
+
+                                }
+                            </td>
+                            <td>
+                                @if (muniItem.Status == SALGASharedReporting.ViewModels.MunicipalityCompletionStatus.NotStarted)
+                                {
+                                    <InputCheckbox @bind-Value="muniItem.Selected" />
+                                    <span>@muniItem.Name</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </EditForm>
+
+}

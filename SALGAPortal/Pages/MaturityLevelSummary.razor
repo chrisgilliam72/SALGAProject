@@ -1,0 +1,73 @@
+﻿
+@if (MaturityLevelDashboardViewModel != null)
+{
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header-dash" style="background-color: #f46d16;">
+                    <span class="text-light">Maturity Level Scores </span>
+                </div>
+                <div class="card-body" style="background-color:white">
+                    <div class="row">
+                        <div class="col">
+                            <table class="table table-bordered maturityLevelTable">
+                                <tbody>
+                                    <tr>
+                                        <th scope="col" class="col-6">Category</th>
+                                        <th scope="col">Level 1</th>
+                                        <th scope="col">Level 2</th>
+                                        <th scope="col">Level 3</th>
+                                        <th scope="col">Level 4</th>
+                                    </tr>
+                                    @{
+                                        foreach (var categorySection in MaturityLevelDashboardViewModel.Sections)
+                                        {
+                                            var sectionLevels = categorySection.QuestionCategoryLevels;
+                                            <tr>
+                                                <td class="maturityLevelTable">
+                                                    @categorySection.CategoryName
+                                                </td>
+                                                <td>@sectionLevels.Level1</td>
+                                                <td>@sectionLevels.Level2</td>
+                                                <td>@sectionLevels.Level3</td>
+                                                <td>@sectionLevels.Level4</td>
+                                            </tr>
+                                        }
+                                    }
+                                    <tr>
+                                        <td>Total Points</td>
+                                        <td>@MaturityLevelDashboardViewModel.OverallMaturityLevels.Level1Points</td>
+                                        <td>@MaturityLevelDashboardViewModel.OverallMaturityLevels.Level2Points</td>
+                                        <td>@MaturityLevelDashboardViewModel.OverallMaturityLevels.Level3Points</td>
+                                        <td>@MaturityLevelDashboardViewModel.OverallMaturityLevels.Level4Points</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Percentage</td>
+                                        <td>@MaturityLevelDashboardViewModel.OverallMaturityLevels.Level1Percent</td>
+                                        <td>@MaturityLevelDashboardViewModel.OverallMaturityLevels.Level2Percent</td>
+                                        <td>@MaturityLevelDashboardViewModel.OverallMaturityLevels.Level3Percent</td>
+                                        <td>@MaturityLevelDashboardViewModel.OverallMaturityLevels.Level4Percent</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td>Overall: Maturity Level:</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td> @MaturityLevelDashboardViewModel.OverallMaturityLevels.MaturityLevel</td>
+                                    </tr>
+
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+}
+

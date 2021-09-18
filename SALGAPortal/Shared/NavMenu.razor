@@ -1,0 +1,57 @@
+﻿<div class="top-row pl-4 navbar navbar-dark">
+
+
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <ul class="nav flex-column" style="padding-top: 2em;line-height: 3;">
+        <li>
+            <NavLink class="nav-link sidenav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true" style="color: #93969E"></span>
+                <span style="color: #93969E" >Dashboard</span>
+            </NavLink>
+        </li>
+        <li>
+            <NavLink class="nav-link sidenav-link" href="AssessmentManagement" Match="NavLinkMatch.All">
+                <span class="oi oi-laptop" aria-hidden="true" style="color: #93969E"> </span>
+                <span style="color: #93969E" >Management</span>
+            </NavLink>
+        </li>
+        <li>
+            <NavLink class="nav-link sidenav-link" href="SummaryData" Match="NavLinkMatch.All">
+                <span class="oi oi-calendar" aria-hidden="true" style="color: #93969E"> </span>
+                <span style="color: #93969E" >Summary</span>
+            </NavLink>
+        </li>
+        <li>
+            <NavLink class="nav-link sidenav-link" href="Personnel" Match="NavLinkMatch.All">
+                <span class="oi oi-people" aria-hidden="true" style="color: #93969E"> </span>
+                <span style="color: #93969E" >Personnel</span>
+            </NavLink>
+        </li>
+
+        <li>
+            <NavLink class="nav-link sidenav-link" href="AuditTrail" Match="NavLinkMatch.All">
+                <span class="oi oi-document" aria-hidden="true" style="color: #93969E"></span>
+                <span style="color: #93969E" >Auditing</span>
+            </NavLink>
+        </li>
+
+
+    </ul>
+
+</div>
+
+
+
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+       
+    }
+}

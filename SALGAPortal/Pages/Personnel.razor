@@ -1,0 +1,60 @@
+﻿@page "/Personnel"
+<AuthorizeView Policy="Only All Users Group" Roles="Admin">
+    <Authorized Context="stuff">
+        <h3>Personnel</h3>
+        <table class="table table-sm table-bordered maturityLevelTable" >
+            <thead>
+                <tr>
+                    <th>Munipcality</th>
+                    <th>Role</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody >
+
+                @{ int counter = 0; }
+                @foreach (var user in ListAuthorizedUsers)
+                {
+                    String modalID = "modalBox" + counter;
+                    String modalTarget = "#" + modalID;
+                    <tr>
+                        <td>@user.Municipality</td>
+                        <td>@user.Role</td>
+                        <td>@user.Name</td>
+                        <td>@user.Email</td>
+                        <th>@user.Phone</th>
+                        <td>
+                            <div class="assess-edit">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="@modalTarget">Edit</button>
+                            </div>
+                            <!-- M O D A L  S E C T I O N -->
+                            <div class="modal fade" id="@modalID" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog  modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <b class="modal-title" id="exampleModalLabel">@ListAuthorizedUsers[counter].Name Details</b>
+                                            
+                                        </div>
+                                        <div class="modal-body">
+                                            <AuthorizedPerson AuthorizedPersonViewModel="@ListAuthorizedUsers[counter]" OnUserDetailsUpdated="UpdateUserInList" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    counter++;
+                }
+            </tbody>
+        </table>
+    </Authorized>
+    <NotAuthorized>
+        <br />
+        <div>
+            <a href="#"><img src="\images\hr.jpg" alt="authorization" style="width:100%; height:100%"></a>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>

@@ -1,0 +1,50 @@
+﻿@using Syncfusion.Blazor.Maps
+@using SALGAPortal.ViewModels
+
+<div class="row">
+    <div class="col">
+        <!-- M U N I C I P A L I T Y  O V E R V I E W -->
+        <div class="muni" style="height:70px; border-radius:5px; filter:drop-shadow(0px 4px 4px #B6BAB9); background-color: #ffffff;text-align:center;">
+            <img src="/images/info-icon.png" style="height:50px ;float:left; margin-top:10px; margin-left: 5px; margin-right:15px;" />
+            <span class="muni1" ><b>@SelectedProvince</b></span>
+            <div style="height:70px; float:right; text-align:center; padding-left: 10px;
+border-left: 1px solid #DBDBDB;">
+                <span style="color:#F46D16;font-size:18px;padding:20px;"><b>Municipalities</b></span>
+                <br />
+                <span style="color:#272D3E; font-size:30px;">@NoMunicipalities</span>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col">
+        <SfMaps Background="transparent">
+            <MapsEvents ShapeSelected="@OnShapeSelected"></MapsEvents>
+            <MapsLegendSettings Visible="true" 
+                                Mode="LegendMode.Default" Shape="LegendShape.Rectangle" ShapeHeight="20" ShapeWidth="30" Position="LegendPosition.Left">
+            </MapsLegendSettings>
+            <MapsAreaSettings Background="transparent"></MapsAreaSettings>
+            <MapsLayers>
+                <MapsLayer ShapeData="MapShapeData" DataSource="MapColorData"
+                           ShapeDataPath="ProvinceName" TValue="MapProvinceMaturityLevel" ShapePropertyPath='new string[] { "name" }'>
+                    <MapsLayerTooltipSettings Visible="true"
+                                              ValuePath="ProvinceName"
+                                              Format="<b>${ProvinceName}</b><br>Assessments Completed: <b>${AssessmentsCompleted}</b><br>Assessments Not Completed: <b>${AssessmentsNotCompleted}">
+                    </MapsLayerTooltipSettings>
+                    <MapsShapeSettings ColorValuePath="AverageMaturityLevel">
+                        <MapsShapeBorder Color="white"></MapsShapeBorder>
+                        <MapsShapeColorMappings>
+                            <MapsShapeColorMapping Value="Maturity Level 0" Color='new String []{"Crimson"}' />
+                            <MapsShapeColorMapping Value="Maturity Level 1" Color='new String []{"FireBrick"}' />
+                            <MapsShapeColorMapping Value="Maturity Level 2" Color='new String []{"Coral"}' />
+                            <MapsShapeColorMapping Value="Maturity Level 3" Color='new String []{"GreenYellow"}' />
+                            <MapsShapeColorMapping Value="Maturity Level 4" Color='new String []{"DarkGreen"}' />
+                            <MapsShapeColorMapping Value="selected" Color='new String []{"#3a3f52"}' ShowLegend="false"/>
+                        </MapsShapeColorMappings>
+                    </MapsShapeSettings>
+                </MapsLayer>
+            </MapsLayers>
+        </SfMaps>
+    </div>
+</div>

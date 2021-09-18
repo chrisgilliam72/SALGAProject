@@ -1,0 +1,19 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+*.dll
+*.pdb
+
+/MunicipalityPortal/bin/
+/MunicipalityPortal/obj/
+/SALGADemographics/bin/
+/SALGADemographics/obj/
+/MailHelper/obj/
+/MailHelper/bin/
+/SALGAPortal/bin/
+/SALGAPortal/obj/
+/EvidenceRepository/obj/
+/EvidenceRepository/bin/
+/SALGASharedReporting/obj/
+/SALGASharedReporting/bin/

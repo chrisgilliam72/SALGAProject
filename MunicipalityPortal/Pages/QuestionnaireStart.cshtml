@@ -1,0 +1,133 @@
+﻿@page
+@model SALGAWeb.Pages.QuestionnaireStart
+@{
+}
+
+
+
+<div class="container">
+    @if (Model.IsReturningUser)
+    {
+        <div style=" width: max-content; margin-left: auto; margin-right: auto;margin-top: 3.5em;">
+        <div class="card" style="margin-top:6em">
+        <div class="card-header text-center">
+            <div class="card-title-login">
+                Access Self-Assessment
+            </div>
+        </div>
+        <div class="card-body" >
+            <div class="col">
+                <div class="row">
+
+                    <div class="col">
+                        <div class="mt-2 text-center">
+                            <form>
+                                @if (Model.CompletedDemographics && Model.CompletedHRMDemographics)
+                                {
+                                    <p class="card-text text-center">
+                                        You have completed capturing the <b>Demographic info</b>.<br /> Click below button to go to your dashboard
+                                    </p>
+                                    <p>
+                                        <button class="btn btn-primary btn-lg btn-block" asp-page="./Dashboard" style="width:90%;background-color:#272d3e;border: none; ">Go to Dashboard</button>
+                                    </p>
+                                    <button class="btn demo-info-complete" asp-page="./DemographicInfo">Demographic<br /> Information</button>
+                                    <button class="btn demo-info-complete" asp-page="./AssessmentQuestions">Assessment<br /> Questionaire</button>
+                                }
+                                else
+                                {
+                                    @if (@Model.CompletedDemographics)
+                                    {
+                                        <p class="card-text text-center">
+                                            You have completed capturing the <b>Demographic info</b>.<br />Please tart the self-assessment.
+                                        </p>
+                                        <button class="btn demo-info-complete" asp-page="./DemographicInfo">Demographic<br /> Information</button>
+                                        <button class="btn Ass-questionaire" asp-page="./AssessmentQuestions">Assessment<br /> Questionaire</button>
+                                    }
+                                    else
+                                    {
+                                        <p class="card-text text-center">
+                                            In order to start with the self-assessment<br />
+                                            questionnaire the <b>Demographic Info</b><br /> has to
+                                            be completed.
+                                        </p>
+                                        <button class="btn demo-info" asp-page="./DemographicInfo">Demographic<br /> Information</button>
+                                        <button class="btn Ass-questionaire" asp-page="./AssessmentQuestions" disabled="disabled">Assessment<br /> Questionaire</button>
+                                    }
+                                }
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            </div>
+
+        </div>
+    }
+    else
+    {
+        <div class="onboarding-tainer">
+            <div id="carouselExampleCaptions" class="carousel slide" data-interval="false">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="intro-img-1">
+
+                        </div>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3 style="color:#272d3e">Welcome to SALGA Self-Profiling Tool</h3>
+
+                            <p>
+                                You will be all set up, and running in just 12 minutes.
+                            </p>
+                            <button data-bs-target="#carouselExampleCaptions" class="btn crd-tertiary-intro" data-bs-slide="next">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                    <!-- S L I D E  T W O -->
+                    <div class="carousel-item">
+                        <div class="intro-img-2">
+
+                        </div>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3 style="color:#272d3e">Demographic Information</h3>
+                            <p>
+                                To start you off, fill in your municipal demographic information.
+                            </p>
+                            <button data-bs-target="#carouselExampleCaptions" class="btn crd-tertiary-intro" data-bs-slide="next">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                    <!-- S L I D E  T H R E E -->
+                    <div class="carousel-item">
+                        <div class="intro-img-3">
+
+                        </div>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3 style="color:#272d3e">Self-Assessment </h3>
+                            <p>
+                                Once you have completed capturing the municipal demographic information, you can then start with the self-assessment
+                            </p>
+                            <form>
+                                <button class="btn demo-info" asp-page="./DemographicInfo">Demographic<br /> Information</button>
+                                <button class="btn Ass-questionaire" asp-page="./AssessmentQuestions">Assessment<br /> Questionaire</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</div>
+
+

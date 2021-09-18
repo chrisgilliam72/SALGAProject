@@ -1,0 +1,38 @@
+﻿
+<div class="row">
+    <div class="col">
+        <div class="card">
+
+            <div class="card-header-dash" style="background-color: #f46d16;">
+                <span class="text-light">Historical Reports</span>
+            </div>
+
+            <div class="card-body">
+                <table class="table table-striped maturityLevelTable">
+                    <thead>
+                        <tr>
+                            <th scope="col"> Year</th>
+                            <th scope="col"> Document</th>
+                            <th></th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var prevAssessment in PastAssessmentsList)
+                        {
+                            <tr>
+                                <td>@prevAssessment.Year </td>
+                                <td>@prevAssessment.Name </td>
+                                <td>
+                                    <div class="d-flex justify-content-end">
+                                        <a class="btn btn-primary" style="background-color: #f46d16; border: none; margin-left: 1em;" href="/DownloadHistoricPDF?BlobName=@prevAssessment.Name&ContainerName=HistoricAssessments">Download</a>
+                                    </div>                                    
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

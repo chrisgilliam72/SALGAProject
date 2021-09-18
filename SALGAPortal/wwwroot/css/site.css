@@ -1,0 +1,251 @@
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+/* General layout styling */
+
+
+/*===============================
+
+=================================*/
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+a, .btn-link {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+app {
+    position: relative;
+
+    flex-direction: column;
+}
+.stage-container {
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+.tab-tainer {
+    margin-left: auto;
+    margin-right: auto;
+    width: max-content;
+}
+.top-row {
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.main {
+    flex: 1;
+}
+
+    .main .top-row {
+        background-color: #fff;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .main .top-row > a, .main .top-row .btn-link {
+        white-space: nowrap;
+        margin-left: 1.5rem;
+    }
+
+.main .top-row a:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/*=========================
+    TABS
+===========================
+*/
+
+.tab-content > .active {
+    display: block;
+    background-color: #fff0;
+    padding: 50px 30px;
+}
+.nav-tabs {
+    border-bottom: 1px solid #dee2e6;
+}
+.nav-tabs .nav-link.active {
+    color: #fff;
+    background-color: #f46d16!important;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+/*=========================
+    SIDEBAR
+===========================
+*/
+
+.sidebar {
+    background-color: #272d3ee8;;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:1000;
+}
+
+    .sidebar .top-row {
+        background-color: #ffffff;
+    }
+
+    .sidebar .navbar-brand {
+        font-size: 1.1rem;
+    }
+
+    .sidebar .oi {
+        font-size: 1rem;
+        vertical-align: text-top;
+        top: -8px;
+        border: 2px solid gray;
+        border-radius: 50%;
+        padding: .45em;
+    }
+
+    .sidebar .nav-item {
+        font-size: 0.9rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .sidebar .nav-item:first-of-type {
+        padding-top: 1rem;
+    }
+
+    .sidebar .nav-item:last-of-type {
+        padding-bottom: 1rem;
+    }
+
+    .sidebar .nav-item a {
+        color: #d7d7d7;
+        border-radius: 4px;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        line-height: 3rem;
+    }
+
+    .sidebar .nav-item a.active {
+        background-color: rgba(255,255,255,0.25);
+        color: white;
+    }
+
+    .sidebar .nav-item:hover {
+        color: #f46d16;
+    }
+
+.content {
+
+    margin-top: 5em;
+    margin-left:180px;
+}
+
+.navbar-toggler {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+@media (max-width: 767.98px) {
+    .main .top-row:not(.auth) {
+        display: none;
+    }
+
+    .main .top-row.auth {
+        justify-content: space-between;
+    }
+
+    .main .top-row a, .main .top-row .btn-link {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    app {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        width: 180px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        height: 100vh;
+    }
+
+    .main .top-row {
+        position:fixed;
+        filter: drop-shadow(3px 2px 2px gray);
+        top: 0;
+    }
+
+    .main > div {
+        background-color: #ECF1F0;
+    }
+
+    .navbar-toggler {
+        display: none;
+    }
+
+    .sidebar .collapse {
+        /* Never collapse the sidebar for wide screens */
+        display: block;
+        padding-top: 35px;
+    }
+    #divGeoMap {
+        overflow: hidden;
+        display: inline-block;
+        margin-top: 100px;
+/*        border: 1px solid green;*/
+    }
+    .divGeoMap {
+        width: 100%;
+        height: 600px;
+        padding-top: 5em;
+        text-align: center;
+        display: inline-block;
+        margin-top: 50px;
+    }
+
+
+    #divGeoMap svg path[fill^='none'] {
+        stroke-width: 0px;
+        overflow:hidden;
+    }
+}

@@ -1,0 +1,127 @@
+﻿
+@if (Sections.Count > 0)
+{
+    <div class="row">
+        <div class="col-2">
+            <h3 style="font-size:15px;">SELF ASSESSMENT</h3>
+        </div>
+        <div class="col-4">
+            <label>Year :</label>
+            <select value="@SelectedYear" class="dropdownDashboard" @onchange="OnYearSelectionChanged">
+                @foreach (var year in YearList)
+                {
+                    <option value="@year">@year</option>
+                }
+            </select>
+        </div>
+        @if (ShowingCurrentYear)
+        {
+            <div class="col-6">
+                <div class="d-row gap-2 d-md-flex justify-content-md-end">
+                    @if (IsApproved)
+                    {
+                        <button class="btn assess-approve" disabled="disabled">Approved</button>
+                    }
+                    else if (IsRejected)
+                    {
+                        <button class="btn assess-request" disabled="disabled">Pending Review</button>
+                    }
+                    else @if (IsReady)
+              {
+                <button class="btn assess-request" @onclick="(()=>OnRejectAssessment())">Request Re-Assessment</button>
+                <button class="btn assess-approve" @onclick="(()=>OnSubmitAssessment())">Approve</button>
+            }
+            else
+            {
+                <button class="btn assess-request" disabled="disabled">Awaiting submission</button>
+            }
+                </div>
+            </div>
+        }
+
+    </div>
+
+    <div class="row">
+
+        @{
+            int cardCount = Sections.Count;
+            for (int cardIndex = 0; cardIndex < cardCount; cardIndex++)
+            {
+
+                int SectionNo = cardIndex;
+                String modalID = "asssmentsmodalBox" + cardIndex;
+                String modalTarget = "#" + modalID;
+                string progressClass = Sections[cardIndex].IsComplete ? "status-indicator-complete" : "status-indicator-incomplete";
+                <div class="col mb-4">
+                            <div class="card" style="width:350px;height:350px">
+                                @{
+                                    var cardID = "CardNo" + cardIndex;
+                                    var pageTitle = Sections[cardIndex].Name;
+                                }
+                                <div class="card-header-assdash bg-assess">
+                                    <div class="card-title-dash">
+                                        @pageTitle
+                                    </div>
+                                    <i class="@Sections[cardIndex].IconPath dash-card-icon"></i>
+                                </div>
+                                <div class="card-body-assessments">
+                                    <div class="row">
+                                        <p><b>Status</b></p>
+
+                                        @if (Sections[cardIndex].IsComplete)
+                                        {
+                                            <div class="@progressClass">
+                                                Complete<span class="percentage-area">@Sections[cardIndex].PercentComplete %</span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="@progressClass">
+                                                Incomplete<span class="percentage-area">@Sections[cardIndex].PercentComplete %</span>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                @if (IsReady && ShowingCurrentYear)
+                                {
+                                    <div class="assess-edit">
+                                        <button type="button" class="btn review-btn" data-bs-toggle="modal" data-bs-target="@modalTarget">CLICK TO REVIEW</button>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="assess-edit">
+                                        <button type="button" class="btn review-btn" data-bs-toggle="modal" data-bs-target="@modalTarget">View</button>
+                                    </div>
+                                }
+
+                            </div>
+
+
+                    <!-- M O D A L  S E C T I O N -->
+                    <div class="modal fade" id="@modalID" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog  modal-dialog-centered modal-lg" style="max-width: 1800px !important;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title" id="exampleModalLabel">@Sections[0].Name</h3>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <AssessmentSectionReview ResponseTypes="ResponseTypes" ListQuestionsAnswers="ReviewViewModels[cardIndex].ListQuestionsAnswers" 
+                                                             ShowSave="ShowingCurrentYear"  ViewOnly="!IsReady"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            }
+        }
+    </div>
+
+}
+
+
+

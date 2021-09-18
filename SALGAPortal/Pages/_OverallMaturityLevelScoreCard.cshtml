@@ -1,0 +1,34 @@
+﻿@model SALGASharedReporting.ViewModels.OverallMaturityLevelScorecardViewModel
+
+
+<div class="card">
+    <div class="card-header">Maturity Level</div>
+    <div class="card-body" style="line-height: 1">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Level 1</th>
+                    <th>Level 2</th>
+                    <th>Level 3</th>
+                    <th>Level 4</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var row in Model.Rows)
+                {
+                    <tr>
+                        <td>@row.SectionName</td>
+                        <td>@row.Level1</td>
+                        <td>@row.Level2</td>
+                        <td>@row.Level3</td>
+                        <td>@row.Level4</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+
+    </div>
+</div>

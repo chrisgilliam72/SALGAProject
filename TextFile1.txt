@@ -1,0 +1,23 @@
+<main role="main" class="pb-3">
+        <div id="sidenav" class="sidenav" style="display:none">
+            <li><i class="material-icons">home</i> Dashboard</li>
+            <li><i class="material-icons">grading</i> Assessments</li>
+            <li><i class="material-icons">leaderboard</i> Reports</li>
+
+        </div>
+
+
+        
+    <script type="text/javascript">
+        function toggleNAV() {
+            var bar = document.getElementById('sidenav');
+
+            if (bar.style.display === 'none') {
+                bar.style.display = "block";
+            }
+            else {
+                bar.style.display = "none";
+            }
+            
+        }
+    </script>

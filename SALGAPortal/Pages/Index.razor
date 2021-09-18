@@ -1,0 +1,175 @@
+﻿@page "/"
+@inject IJSRuntime JS;
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Spinner
+<AuthorizeView Policy="Only All Users Group">
+    <Authorized>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col" style="text-align:center">
+                        <ProvincialMap @ref="SyncFusionMap" Provinces="@Provinces" Municipalities="@Municipalities"
+                                       OnProvinceSelected="@ProvinceSelected" AuthorizedProvinces="AuthorizedProvinceNames" />
+                    </div>
+                </div>
+            </div>
+            @if (SelectedMunicipality != null && HasData)
+            {
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="muni4">
+                                <h3>@SelectedMunicipality.Name Municipality </h3>
+                            </div>
+
+
+                        </div>
+                        <div class="col-6 ">
+                            <div class="muni2">
+
+                                <h3 class="muni3">Current Maturity Level  <span>@CurrentMaturityLeval</span></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="mx-auto" id="chartOverall" style="width:600px;height:600px">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-9">
+                        </div>
+                        <div class="col-3 ">
+                            <div class="d-flex justify-content-end">
+                                <a class="btn btn-primary" style="background-color: #f46d16; border: none; " href="/DownloadWordReport?MunicipalityName=@SelectedMunicipality.Name">Download Report</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            }
+            else
+            {
+                <div class="col-6" style="border-left: 1px solid #272D3E ">
+                    <div class="row">
+                        <div class="d-flex align-items-center justify-content-center" style="height: 600px ;margin-top: -100px;">
+                            <div class="textcont">
+                                <h1>Welcome</h1>
+                                <p><strong>to the</strong></p>
+                                <h2>MunicipalHRPulse(muniHRP)</h2>
+                                <p> <strong>Click on the Map to access your Municipalities Data</strong> </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="tab-tainber">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="valuechain-tab" data-bs-toggle="tab" data-bs-target="#valuechain" type="button" role="tab" aria-controls="valuechain" aria-selected="true">Value Chain</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="assessments-tab" data-bs-toggle="tab" data-bs-target="#assessmentsections" type="button" role="tab" aria-controls="assessmentsections" aria-selected="false">Assessments</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="dashboard-tab" data-bs-toggle="tab" data-bs-target="#maturityDashboard" type="button" role="tab" aria-controls="maturityDashboard" aria-selected="false">Maturity Level Dashboard</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="summary-tab" data-bs-toggle="tab" data-bs-target="#maturitySummary" type="button" role="tab" aria-controls="MaturityLevelSummary" aria-selected="false">Maturity Level Summary</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="passessments-tab" data-bs-toggle="tab" data-bs-target="#pastAssessments" type="button" role="tab" aria-controls="pastAssessments" aria-selected="false">Past Reports </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade" id="maturityDashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                            <div class="row">
+                                <div class="col">
+                                    <MaturityLevelsDashboard @ref="MaturityLevelsDashboard" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="maturitySummary" role="tabpanel" aria-labelledby="summary-tab">
+                            <div class="row">
+                                <div class="col">
+                                    <MaturityLevelSummary @ref="MaturityLevelSummary" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade show active" id="valuechain" role="tabpanel" aria-labelledby="valuechain-tab">
+                            <div class="row">
+                                <div class="col">
+                                    <ValueChainBreakdown @ref="ValueChainBreakdown" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="assessmentsections" role="tabpanel" aria-labelledby="assessments-tab">
+                            <div class="row">
+                                <div class="col">
+                                    <AssessmentSections @ref="AssessmentSections" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pastAssessments" role="tabpanel" aria-labelledby="pastAssessments-tab">
+                            <div class="row">
+                                <div class="col">
+                                    <PreviousAssessments Municipality="@SelectedMunicipality" @ref="PreviousAssessments" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="idShowBusy" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <b class="modal-title" id="exampleModalLabel">Loading data...</b>
+                    </div>
+                    <div class="modal-body">
+                        <br />
+                        <SfSpinner Visible="true"></SfSpinner>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="idShowMunicipalityLst" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <b class="modal-title" id="exampleModalLabel">Select Municipality</b>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <MunicipalitySelection @ref="MunicipalitySelection" Municipalities="@Municipalities"
+                                               OnMunicipalitySelected="MunicipalityReportUpdate" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <br />
+        <div>
+            <a href="#"><img src="\images\hr.jpg" alt="authorization" style="width:100%; height:100%"></a>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+

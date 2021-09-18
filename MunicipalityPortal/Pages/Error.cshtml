@@ -1,0 +1,28 @@
+﻿@page
+
+@model ErrorModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<br />
+<br />
+<div style="background-image: url('images/salgaerrorbackground.jpg');background-repeat:no-repeat; width:95%;height:95vh">
+    <div class=" align-items-center" >
+        <h1 class="text-danger">The following Exception has occurred :</h1>
+
+        <span>
+            @Model.ExceptionString
+
+        </span>
+    </div>
+
+</div>
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </p>
+}
+
+

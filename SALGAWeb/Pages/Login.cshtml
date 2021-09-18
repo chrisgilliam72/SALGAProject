@@ -1,0 +1,42 @@
+﻿@page
+@model SALGAWeb.Pages.LoginModel
+@{
+}
+
+<div style="width:100%; background-image:url(Images/background2.jpg); padding-top: 30px; padding-bottom:50px;">
+    <form method="post">
+        <div class="card" style="width:500px; margin-top:135px">
+            <div class="card-header bg-light">
+                <div class="card-title-login"> LOGIN DETAILS </div>
+            </div>
+            <div class="card-body login">
+                <input type="email" asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+
+                <input type="password" asp-for="Password" placeholder="Enter Password" class="form-control" />
+
+                <span asp-validation-for="Password" class="text-danger"></span>
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="row mt-3">
+                    <div class="col">
+                        <p>
+                            <button type="submit" class="btn crd-tertiary" value="login">
+                                <i class="fa fa-sign-in fa-lg"></i>
+                                LOGIN
+                            </button>
+                            Or
+                            <a asp-page="./Register" class="crd-secondary" value="register">Register</a>
+                        </p>
+                        <a asp-page="./ForgotPassword" class="modal-text-link" value="register">Forgot <b>Password?</b></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+    </div>
+    @section scripts{
+        <partial name="_ValidationScriptsPartial" />
+    }

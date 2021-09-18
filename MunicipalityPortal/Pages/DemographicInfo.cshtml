@@ -1,0 +1,325 @@
+﻿@page
+@using SALGADBLib
+@using Syncfusion.EJ2
+@model SALGAWeb.Pages.DemographicInfoModel
+@{
+    ViewData["Title"] = "Demographic Info";
+}
+
+
+
+<!-- B A C K  B U T T O N -->
+<div style=" padding-top: 20px; margin-top: 20px;">
+    <div class="back-btn-container">
+        <a asp-page="./Dashboard" class="back-btn">
+            Go to Dashboard
+        </a>
+    </div>
+    <div class="form-info">
+        <h2>Demographic Information</h2>
+        <h4>Please complete all the sections in the form below.</h4>
+    </div>
+</div>
+<form method="post" enctype="multipart/form-data">
+    @Html.HiddenFor(x => Model.MunicipalityAndCategories)
+    <div asp-validation-summary="All" class="text-danger">
+    </div>
+    <div class="accordion" id="accordionExample">
+
+        <!-- S T A R T  1 S T  I T E M -->
+        <input type="hidden" asp-for="IntervieweeDetails.pkID" />
+        <input type="hidden" asp-for="IntervieweeDetails.Active" />
+        <input type="hidden" asp-for="HRMDFunctionDemographics.pkID" />
+        <input type="hidden" asp-for="MunicipalityDemographics.pkID" />
+        <input type="hidden" asp-for="SelectedMunicipality" />
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    @if (Model.IsShowingCapturer)
+                    {
+                        <b>SECTION ONE - Primary Interviewee's Details</b>
+                    }
+                    else
+                    {
+                        <b>SECTION ONE - Approver's Details</b>
+                    }
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="form-group row mt-2">
+                        <label for="IntervieweeDetails.FirstName" class="col-4 col-form-label">First Name:</label>
+                        <div class="col-5">
+                            <input type="text" asp-for="IntervieweeDetails.FirstName" class="form-control form-rounded accordion-input" />
+                            <span asp-validation-for="IntervieweeDetails.FirstName" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group row mt-2">
+                        <label for="IntervieweeDetails.LastName" class="col-4 col-form-label">Last Name:</label>
+                        <div class="col-5">
+                            <input type="text" asp-for="IntervieweeDetails.LastName" class="form-control form-rounded accordion-input" />
+                            <span asp-validation-for="IntervieweeDetails.LastName" class="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row mt-2">
+                        <label asp-for="IntervieweeDetails.Municipality.Name" class="col-4 col-form-label">Municipality:</label>
+                        <div class="col-5">
+                            <input id="txtMuniCategory" type="text" asp-for="IntervieweeDetails.Municipality.Name" class="form-control form-rounded accordion-input" disabled="disabled" />
+                        </div>
+                    </div>
+                    @{ if (Model.IntervieweeDetails != null)
+                        {
+                            <div class="form-group row mt-2">
+                                <label asp-for="MunicipalityCatagory" class="col-4 col-form-label">Category:</label>
+                                <div class="col-5">
+                                    <input id="txtMuniCategory" type="text" asp-for="MunicipalityCatagory" class="form-control form-rounded accordion-input" disabled="disabled" />
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    <div class="form-group row mt-2">
+                        <label asp-for="IntervieweeDetails.Email" class="col-4 col-form-label">Email Address:</label>
+                        <div class="col-5">
+                            <input type="email" asp-for="IntervieweeDetails.Email" class="form-control form-rounded accordion-input" />
+                            <span asp-validation-for="IntervieweeDetails.Email" class="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row mt-2">
+                        <label asp-for="IntervieweeDetails.ContactNumber" class="col-4 col-form-label">Landline Number:</label>
+                        <div class="col-5">
+                            <input type="tel" asp-for="IntervieweeDetails.ContactNumber" class="form-control form-rounded accordion-input" />
+                            <span asp-validation-for="IntervieweeDetails.ContactNumber" class="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group row mt-2">
+                        <label asp-for="IntervieweeDetails.ContactNumber" class="col-4 col-form-label">Cell Number:</label>
+                        <div class="col-5">
+                            <input type="tel" asp-for="IntervieweeDetails.CellNumber" class="form-control form-rounded accordion-input" />
+                            <span asp-validation-for="IntervieweeDetails.CellNumber" class="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row mt-2">
+                        <label asp-for="IntervieweeDetails.JobTitle" class="col-4 col-form-label">Job Title:</label>
+                        <div class="col-5">
+                            <select type="text" asp-for="SelectedJobTitle" asp-items="Model.JobTitles" class="form-control form-rounded accordion-input"></select>
+                            <span asp-validation-for="@Model.SelectedJobTitle" class="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row mt-2">
+                        <label asp-for="IntervieweeDetails.InterviewDate" class="col-4 col-form-label">Interview Date:</label>
+                        <div class="col-5">
+                            <input type="date" asp-for="IntervieweeDetails.InterviewDate" class="form-control form-rounded accordion-input" />
+                            <span asp-validation-for="IntervieweeDetails.InterviewDate" class="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row mt-2">
+                        <label asp-for="IntervieweeDetails.LineManager" class="col-4 col-form-label">Line Manager:</label>
+                        <div class="col-5">
+                            <input type="text" asp-for="IntervieweeDetails.LineManager" class="form-control form-rounded accordion-input" />
+                            <span asp-validation-for="IntervieweeDetails.LineManager" class="text-danger" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row mt-2">
+                        <label asp-for="IntervieweeDetails.YearsInPosition" class="col-4 col-form-label">Years in Position:</label>
+                        <div class="col-5">
+                            <input type="text" asp-for="IntervieweeDetails.YearsInPosition" class="form-control form-rounded accordion-input" />
+                            <span asp-validation-for="IntervieweeDetails.YearsInPosition" class="text-danger" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- E N D  1 S T  I T E M -->
+        <!-- S T A R T  2 N D  I T E M -->
+        <div class="accordion-item">
+            <h2 class="accordion-header-2" id="headingTwo">
+                <button class="accordion-button-2 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <b>SECTION TWO - Municipality Demographics</b>
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="form-group row mt-2">
+                        <label for="MunicipalityDemographics.NoEmployees" class="col-4 col-form-label">Number of Employees</label>
+                        <div class="col-5">
+                            <input type="number" asp-for="MunicipalityDemographics.NoEmployees" class="form-control form-rounded accordion-input" />
+                        </div>
+                    </div>
+                    <div class="form-group row mt-2">
+                        <label for="MunicipalityDemographics.NoPerm54A56" class="col-4 col-form-label">Perm. sect 54A &amp; 56</label>
+                        <div class="col-5">
+                            <input type="number" asp-for="MunicipalityDemographics.NoPerm54A56" class="form-control form-rounded accordion-input" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row mt-2">
+                        <label asp-for="MunicipalityDemographics.NoFixedTerm54A56" class="col-4 col-form-label">Fixed Term sect 54A &amp; 56</label>
+                        <div class="col-5">
+                            <input type="number" asp-for="MunicipalityDemographics.NoFixedTerm54A56" class="form-control form-rounded accordion-input" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row mt-2">
+                        <label asp-for="MunicipalityDemographics.NoPermNon54A56" class="col-4 col-form-label">Perm. non-sect 54A &amp; 56</label>
+                        <div class="col-5">
+                            <input type="number" asp-for="MunicipalityDemographics.NoPermNon54A56" class="form-control form-rounded accordion-input" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row mt-2">
+                        <label asp-for="MunicipalityDemographics.NoFixedTermNon54A56" class="col-4 col-form-label">Fixed Term non-sect 54A &amp; 56</label>
+                        <div class="col-5">
+                            <input type="number" asp-for="MunicipalityDemographics.NoFixedTermNon54A56" class="form-control form-rounded accordion-input" />
+                        </div>
+                    </div>
+                    <div class="form-group row mt-2">
+                        <label asp-for="MunicipalityDemographics.NoOther" class="col-4 col-form-label">Others on payroll but not headcount eg interns &amp; employees fom Labour brokers:</label>
+                        <div class="col-1" style="width:20%;">
+                            <input type="number" asp-for="MunicipalityDemographics.NoOther" class="form-control form-rounded accordion-input" />
+                        </div>
+                        <div class="col-4" style="width:21.8%;">
+                            <input type="text" asp-for="MunicipalityDemographics.OtherExplanation" class="form-control form-rounded accordion-input" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-2">
+                        <label asp-for="MunicipalityDemographics.TotalMonthlyPayroll" class="col-4 col-form-label">Monthly Payroll Amount:</label>
+                        <div class="col-5">
+                            <input asp-for="TotalPayRollValue" class="form-control form-rounded accordion-input" />
+                            <span asp-validation-for="TotalPayRollValue" class="text-danger" />
+                            @*<ejs-numerictextbox id="numeric" name="value" ejs-for="@Model" class="form-control form-rounded accordion-input"></ejs-numerictextbox>*@
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            Senior Managers (Section 54A & 56) vacancy status
+                        </div>
+                        <table class="table scroller">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Portfolio</th>
+                                    <th scope="col">Filled / Vacant</th>
+                                    <th scope="col">Contract Expiry Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int index = 0;}
+                                @foreach (var manager in Model.SeniorManagerList)
+                                {
+
+                                    <tr>
+                                        <td>
+                                            <input type="hidden" asp-for="@Model.SeniorManagerList[index].ManagerID" />
+                                            <input type="hidden" asp-for="@Model.SeniorManagerList[index].FilledPositionID" />
+
+                                            @if (Model.SeniorManagerList[index].CanEdit)
+                                            {
+
+                                                <input type="text" asp-for="@Model.SeniorManagerList[index].Portfolio" class="form-control form-rounded accordion-input" />
+                                            }
+                                            else
+                                            {
+                                                <input type="hidden" asp-for="@Model.SeniorManagerList[index].Portfolio" />
+                                                @Model.SeniorManagerList[index].Portfolio
+                                            }
+                                        </td>
+                                        <td><input type="text" asp-for="@Model.SeniorManagerList[index].Filledby" class="form-control form-rounded accordion-input" /></td>
+                                        <td><input type="date" asp-for="@Model.SeniorManagerList[index].AppointmentDate" class="form-control form-rounded accordion-input"></td>
+                                    </tr>
+                                    index++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- E N D  2 N D  I T E M-->
+        <!-- S T A R T  3 R D  I T E M -->
+        <div class="accordion-item">
+            <h2 class="accordion-header-3" id="headingThree">
+                <button class="accordion-button-3 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <b>SECTION THREE - HRM&D Function Demographics</b>
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="form-group row mt-2">
+                        <label asp-for="HRMDFunctionDemographics.NoPeople" class="col-4 col-form-label">Number of people performing HRM&amp;D functions on a permanent basis </label>
+                        <div class="col-5">
+                            <input type="number" asp-for="HRMDFunctionDemographics.NoPeople" class="form-control form-rounded" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row mt-2">
+                        <label asp-for="HRMDFunctionDemographics.CorporateService" class="col-4 col-form-label">Corporate Service or Stand Alone Unit:</label>
+                        <div class="col-5">
+                            <select type="text" asp-for="SelectedServiceOption" asp-items="Model.ServiceOptions" class="form-control form-rounded"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mt-2">
+                        <div class="col-4">
+                            <label class="custom-file-label">HRMD Organogram</label>
+                        </div>
+                        <div class="col-4">
+
+                            <input asp-for="HRMDOrganogram" class="custom-file-input form-control" type="file" accept="image/*" />
+                        </div>
+                        @if (Model.HRMDFunctionDemographics.MunicipalityOrganogram != null)
+                        {
+                            <div class="col-4">
+                                <a href="@Url.Page("AssessmentSectionDetail", "DownloadEvidenceFile", new {blobName= @Model.HRMDFunctionDemographics.MunicipalityOrganogram.BlobName })">@Model.HRMDFunctionDemographics.MunicipalityOrganogram.OriginalFileName</a>
+                            </div>
+                        }                  
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- E N D  3 R D  I T E M-->
+        <div class="row mt-3 mb-4">
+            <div class="col-12 text-center">
+                <button type="submit" class="btn crd-primary" value="Submit">SUBMIT</button>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/CustomValidation.js"></script>
+    <script type="text/javascript">
+
+
+
+        function singleSelectChangeValue() {
+            //Getting Value
+
+            // METHOD 1
+            var selValue = document.getElementById("drpDownMunicipality").value;
+
+            //Setting Value
+            document.getElementById("txtMuniCategory").value = selValue;
+        }
+    </script>
+}
+
+
+
+
+
+
+
+
+

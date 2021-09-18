@@ -1,0 +1,158 @@
+﻿@page
+@model SALGAWeb.Pages.RegisterModel
+@{
+
+}
+
+//TODO
+//https://www.c-sharpcorner.com/blogs/show-and-hide-password-using-jquery-in-asp-net
+
+<div class="container" style=" padding: 30px">
+  <div class="row">
+    <div class="col-6" style="padding:20px ; border: 1px solid grey; border-radius: 1px">
+        
+        <form method="post" >
+            
+            <div class="register-card" style="width: 100%; margin-top: 100px; ">
+                <div class="card-body">
+                    <h3 style="color:#272D3E !important;">Register</h3>
+                    <div class="form-group row mt-2">
+                        <label for="IntervieweeDetails.FirstName" class="form-label">First Name</label>
+                        <div class="col-8">
+                            <input type="text" asp-for="FirstName" class="form-control form-rounded" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                    <div class="form-group row mt-2">
+                        <label for="IntervieweeDetails.LastName" class="form-label">Last Name</label>
+                        <div class="col-8">
+                            <input type="text" asp-for="LastName" class="form-control form-rounded" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row mt-2">
+                        <label asp-for="ContactNumber" class="form-label">Cell Number</label>
+                        <div class="col-8">
+                            <input type="tel" asp-for="ContactNumber" class="form-control form-rounded" />
+                            <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row mt-2">
+                        <label asp-for="EmailAddress" class="form-label">Email Address</label>
+                        <div class="col-8">
+                            <input type="email" asp-for="EmailAddress" class="form-control form-rounded" />
+                            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row mt-2">
+                        <label asp-for="SelectedJobTitle" class="form-label">Job Title</label>
+                        <div class="col-8">
+                            <select type="text" asp-for="SelectedJobTitle" asp-items="Model.JobTitles" class="form-control form-rounded">
+                                <option value="">Select Job Title</option>
+                            </select>
+                            <span asp-validation-for="SelectedJobTitle" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mt-2">
+                        <label asp-for="SelectedMunicipality" class="form-label">Municipality</label>
+                        <div class="col-8">
+                            <select type="text" asp-for="SelectedMunicipality" asp-items="Model.Municipalities" class="form-control form-rounded">
+                                <option value="">Select Municipality</option>
+                            </select>
+                            <span asp-validation-for="SelectedMunicipality" class="text-danger" ></span>
+                        </div>
+                    </div>
+                    <div class="form-group row mt-2">
+                        <label asp-for="SelectedRole" class="form-label">Role</label>
+                        <div class="col-8">
+                            <select type="text" asp-for="SelectedRole" asp-items="Model.Roles" class="form-control form-rounded">
+                                <option value="">Select Role</option>
+                            </select>
+                            <span asp-validation-for="SelectedRole" class="text-danger"> </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mt-2">
+                        <label asp-for="Password" class="form-label">Password</label>
+                        <div class="col-8">
+                            <div class="input-group">
+                                <input id="id_password" type="password" asp-for="Password" class="form-control form-rounded" />
+                                <div class="input-group-append">
+                                    <button class="btn" id="id_password" type="button">
+                                        <i class="far fa-eye" id="togglePassword"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row mt-2">
+                        <label asp-for="PasswordConfirm" class="form-label">Confirm Password</label>
+                        <div class="col-8">
+                            <div class="input-group">
+                                <input id="id_passwordConfirm" type="password" asp-for="PasswordConfirm" class="form-control form-rounded" />
+                                <div class="input-group-append">
+                                    <button class="btn" id="id_password" type="button">
+                                        <i class="far fa-eye" id="togglePasswordConfirm"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                        </div>
+                        <div class="col-8">
+                            <button type="submit" class="btn crd-tertiary" value="register">Register</button>
+                            <span class="login-instead">Already have an account?<a asp-page="./Login" class="crd-secondary" value="register">Login</a></span>
+                        </div>
+                    </div>
+                    <div asp-validation-summary="All" class="text-danger">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+        
+    <div class="col-4" style="right: 0; top: 100px; width: 50%; padding-top: 50px; padding-bottom: 50px; background-image: url('/EmailTemplates/800 x 400.png'); background-repeat: no-repeat; background-size: cover; background-position: center; ">
+        <div class="reg-text-block">
+            <h1 style="color: #ffffff; font-size: 45px; font-weight:600;"></h1>
+            <p style="color: #ffffff; font-size: 14px; padding-top: 2em;">.</p>
+        </div>
+    </div>
+</div>
+</div>
+    @section scripts{
+        <partial name="_ValidationScriptsPartial" />
+
+        <script type="text/javascript">
+
+            $("#loginFrm").submit(function (e) {
+                $("#chkRememberMe").val($("#chkRememberMe").prop("checked"))
+            })
+
+            const togglePassword = document.querySelector('#togglePassword');
+            const password = document.querySelector('#id_password');
+            const togglePasswordConfirm = document.querySelector('#togglePasswordConfirm');
+            const passwordConfirm = document.querySelector('#id_passwordConfirm');
+
+            
+            togglePassword.addEventListener('click', function (e) {
+                // toggle the type attribute
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                // toggle the eye slash icon
+                this.classList.toggle('fa-eye-slash');
+            });
+
+            togglePasswordConfirm.addEventListener('click', function (e) {
+                // toggle the type attribute
+                const type = passwordConfirm.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordConfirm.setAttribute('type', type);
+                // toggle the eye slash icon
+                this.classList.toggle('fa-eye-slash');
+            });
+        </script>
+    }

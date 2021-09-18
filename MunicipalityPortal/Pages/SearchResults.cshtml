@@ -1,0 +1,51 @@
+﻿@page "{SearchString?}"
+@model MunicipalityPortal.Pages.SearchResultsModel
+
+<div id="start"></div>
+<!-- B A C K  B U T T O N -->
+<div class="back-btn-container">
+    <a onclick="goBack()" class="back-btn">
+        Back
+    </a>
+</div>
+<div class="d-flex justify-content-center">
+    <div class="row">
+        <h1>Search results for @Model.SearchString</h1>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center">
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped table-borderless">
+                <thead>
+                    <tr>
+                        <th>Document Name</th>
+                        <th>Municipality</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var searchItem in Model.SearchResuls)
+                    {
+                        <tr>
+                            <td>
+                                @searchItem.DocumentName
+                            </td>
+                            <td>
+                                @searchItem.Municipality
+                            </td>
+                            <td>
+                                @*<a href="@searchItem.DownloadURL"+ class="btn btn-regular">View</a>*@
+                                <a href="@Url.Page("SearchResults", "DownloadEvidenceFile", new { evidenceID = searchItem.EvidenceID })" class="btn btn-regular">View</a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+

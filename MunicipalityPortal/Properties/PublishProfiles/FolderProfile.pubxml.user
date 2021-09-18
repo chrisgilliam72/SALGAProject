@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>bin\Debug\netcoreapp3.1\publish\</_PublishTargetUrl>
+    <History>True|2021-04-16T10:53:04.0646696Z;True|2021-04-15T13:43:04.2912431+02:00;True|2021-04-14T08:12:29.4306774+02:00;True|2021-04-09T16:44:05.4671891+02:00;True|2021-04-09T16:27:55.2458393+02:00;True|2021-04-07T16:46:05.7411212+02:00;True|2021-04-07T09:10:23.9681908+02:00;</History>
+  </PropertyGroup>
+</Project>

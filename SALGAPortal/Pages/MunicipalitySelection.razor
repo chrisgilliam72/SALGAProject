@@ -1,0 +1,41 @@
+﻿
+
+    <!-- M U N I C I P A L I T Y  O V E R V I E W -->
+    <! -- M U N I C I P A L I T Y  L I S T -->
+    <div style=" margin-top: 1.5em; border-radius: 5px; padding: 25px; filter:drop-shadow(0px 4px 4px #B6BAB9); background-color: #ffffff;">
+        
+        <div class="overflow-auto select" style="height:500px;line-height:1">
+
+            @{ if (ProvinceMunicipalities != null)
+                    //{
+                    @foreach (var municipality in ProvinceMunicipalities)
+                    {
+                        <ul>
+                            <li  style=" width:100%">
+                                <a class="a" href=" " @onclick="()=>OnMunicipalitySelectionChanged(municipality.MunicipalityName)"> @municipality.DisplayName</a>
+                                @if (municipality.HasLocalMunicipalities)
+                                {
+
+                                    <ul>
+                                        @foreach (var localMunicipality in municipality.LocalMunicipalities)
+                                         {
+
+                                            <li>
+                                                <br />
+                                                <a class="b" href="#munDetails" @onclick="()=>OnMunicipalitySelectionChanged(localMunicipality)" style="margin-left:50px">@localMunicipality</a>
+                                                
+                                            </li>
+                                        }
+                                    </ul>                                
+
+                                }
+
+                            </li>
+                        </ul>
+                    }
+            }
+
+       
+        </div>
+    </div>
+

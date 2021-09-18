@@ -1,0 +1,41 @@
+﻿@if (MaturityLevelSectionViewModel != null)
+{
+    <div class="row mt-1">
+        <div class="container-fluid">
+            <table class="table table-sm table-bordered maturityLevelTable" style="overflow: auto;">
+                <thead>
+                    <tr>
+                        <th class="col-1">#</th>
+                        <th class="col-3">Practices or artefacts in place contributing to higher levels of maturity</th>
+                        <th class="col-3">Practices or artefacts requiring attention to improve the currentlevel of maturity</th>
+                        <th class="col">Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var question in MaturityLevelSectionViewModel.QuestionAnswers)
+                        {
+                            <tr>
+                                <td>@question.QuestionNo</td>
+                                <td>
+                                    @if (question.AnswerTypeDisplayString == "yes")
+                                    {
+                                        @question.Note;
+                                    }
+                                </td>
+                                <td>
+                                    @if (question.AnswerTypeDisplayString == "partial" || question.AnswerTypeDisplayString == "no")
+                                    {
+                                        @question.Note;
+                                    }
+                                </td>
+                                <td>@question.Comments</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+}

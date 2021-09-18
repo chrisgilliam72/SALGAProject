@@ -1,0 +1,96 @@
+﻿
+@if (ListQuestionsAnswers != null)
+{
+    <EditForm Model="@ListQuestionsAnswers">
+        <DataAnnotationsValidator />
+        @*<input asp-for="@PageNo" type="hidden" />*@
+        <div>
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-responsive-lg table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="col-6 t-header" style="background-color:#272D3E; color:#ffffff"> Assessment Question</th>
+                                <th style="background-color:#272D3E; color:#ffffff">Response</th>
+                                <th style="background-color:#272D3E; color:#ffffff">Evidence</th>
+                                <th style="background-color:#272D3E; color:#ffffff">Comments</th>
+                                <th style="background-color: #FF4500;color: white;">SALGA Comments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int pageIndex = 0;
+                                var pageQuestions = ListQuestionsAnswers;
+                                foreach (var pageQuestion in pageQuestions)
+                                {
+                                    int questionNo = pageQuestion.QuestionNo;
+                                    <tr>
+                                        <td style="border-bottom: 2px dotted #272d3e;border-right: 2px dotted #272d3e;border-left: none;">
+                                            <input asp-for="@ListQuestionsAnswers[pageIndex].QuestionID" type="hidden" />
+                                            <input asp-for="@ListQuestionsAnswers[pageIndex].QuestionNo" type="hidden" />
+                                            <input asp-for="@ListQuestionsAnswers[pageIndex].Question" type="hidden" />
+                                            <input asp-for="@ListQuestionsAnswers[pageIndex].PageNo" type="hidden" />
+                                            <input asp-for="@ListQuestionsAnswers[pageIndex].FilePath" type="hidden" />
+                                            <input asp-for="@ListQuestionsAnswers[pageIndex].FileName" type="hidden" />
+                                            <input asp-for="@ListQuestionsAnswers[pageIndex].AnswerID" type="hidden" />
+                                            @pageQuestion.Question
+                                        </td>
+                                        <td style="border-bottom: 2px dotted #272d3e;border-right: 2px dotted #272d3e;">
+                                            @if (!ViewOnly)
+                                            {
+                                                if (!pageQuestion.HasCustomResponses)
+                                                {
+                                                    <InputSelect @bind-Value="pageQuestion.AnswerType" >
+                                                        @foreach (var responseType in ResponseTypes)
+                                                                        {
+                                                            <option value="@responseType.ResponseType">@responseType.ResponseType</option>
+                                                                        }
+                                                    </InputSelect>
+                                                }
+                                                else
+                                                {
+                                                    <InputSelect @bind-Value="pageQuestion.AnswerType" class="longtextCombo">
+                                                    @foreach (var responseType in pageQuestion.CustomReponses)
+                                                     {
+                                                        <option value="@responseType.CustomResponse">@responseType.CustomResponse</option>
+                                                    }
+                                                    </InputSelect>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <label>@pageQuestion.AnswerType</label>
+                                            }
+                                        </td>
+                                        <td style="border-bottom: 2px dotted #272d3e;border-right: 2px dotted #272d3e;">
+
+                                            <div>
+                                                <a href="@pageQuestion.FilePath"> @pageQuestion.FileName</a>
+                                            </div>
+                                        </td>
+                                        <td style="border-bottom: 2px dotted #272d3e;border-right: 2px dotted #272d3e;">
+                                            @ListQuestionsAnswers[pageIndex].Comment
+                                        </td>
+                                        <td style="border-bottom: 2px dotted #272d3e;border-right: none;">
+                                            <InputText @bind-Value="@pageQuestion.SALGAComment" style="height:100px;border: none;" placeholder="Comment here..." />
+                                        </td>
+                                    </tr>
+                                    pageIndex++;
+                                }
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+                @if (!ViewOnly)
+                {
+                    <div class="card-footer-assessQ">
+                        <button type="submit" value="answersSave" class="btn btn-primary mx-auto" @onclick="(()=>OnSave())" data-bs-dismiss="modal">Save</button>
+                    </div>
+                }
+
+            </div>
+
+        </div>
+    </EditForm>
+}

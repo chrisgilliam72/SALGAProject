@@ -1,0 +1,91 @@
+﻿
+@inject IJSRuntime JS;
+
+<div class="row">
+
+    @{
+        if (Sections != null && Sections.Count > 0)
+        {
+            int cardCount = Sections.Count;
+
+            @for (int cardIndex = 0; cardIndex < cardCount; cardIndex++)
+            {
+                <div class="col mb-4">
+                    <div class="card" style="width:350px;height:350px">
+                        @{
+                            var cardID = "CardNo" + cardIndex;
+                            var pageTitle = Sections[cardIndex].Name;
+                            var cardNo = cardIndex;
+                            //String SectionNo = "SectionNo" +  (cardIndex / 4);
+                            String SectionNo = "SectionNo0";
+                        }
+
+                        <div id="@SectionNo" class="card-header-assdash bg-assess">
+                            <div class="card-title-dash">
+                                @pageTitle
+                            </div>
+                            <i class="@Sections[cardIndex].IconPath dash-card-icon"></i>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <table class="table table-sm" style="font-size:small">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Level 1</th>
+                                                <th>Level 2</th>
+                                                <th>Level 3</th>
+                                                <th>Level 4</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td># Questions</td>
+                                                <td>@Sections[cardIndex].QuestionsPerLevel.Level1</td>
+                                                <td>@Sections[cardIndex].QuestionsPerLevel.Level2</td>
+                                                <td>@Sections[cardIndex].QuestionsPerLevel.Level3</td>
+                                                <td>@Sections[cardIndex].QuestionsPerLevel.Level4</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Score</td>
+                                                <td>@Sections[cardIndex].ScorePerLevel.Level1</td>
+                                                <td>@Sections[cardIndex].ScorePerLevel.Level2</td>
+                                                <td>@Sections[cardIndex].ScorePerLevel.Level3</td>
+                                                <td>@Sections[cardIndex].ScorePerLevel.Level4</td>
+                                            </tr>
+                                            <tr>
+                                                <td>% Score</td>
+                                                <td>@Sections[cardIndex].PercentageScore.Level1</td>
+                                                <td>@Sections[cardIndex].PercentageScore.Level2</td>
+                                                <td>@Sections[cardIndex].PercentageScore.Level3</td>
+                                                <td>@Sections[cardIndex].PercentageScore.Level4</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td>Functional Level</td>
+                                                <td>@Sections[cardIndex].FunctionalLevel</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        }
+    }
+
+</div>
+
+
+

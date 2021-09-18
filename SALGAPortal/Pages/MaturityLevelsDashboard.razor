@@ -1,0 +1,71 @@
+﻿@inject IJSRuntime JS;
+
+@if (MaturityLevelDashboardViewModel != null && MaturityLevelDashboardViewModel.Sections != null)
+{
+    <div class="row" style=" padding-top:20px;">
+
+        @{
+            var cardCount = MaturityLevelDashboardViewModel.Sections.Count;
+            for (int cardIndex = 0; cardIndex < cardCount; cardIndex++)
+            {
+
+                
+                String modalID = "dashboardmodalBox" + cardIndex;
+                String modalTarget = "#" + modalID;
+                var maturityLvlSect = MaturityLevelDashboardViewModel.Sections[cardIndex];
+                string chartName = "chart" + maturityLvlSect.PageNo;
+                <div class="col mb-4">
+                    <div class="card" style="width:350px;height:380px;">
+                        @{
+                            var cardID = "CardNo" + cardIndex;
+                        }
+                        <div class="card-header-assdash bg-assess h-100">
+                            <div class="card-title-dash">
+                                @maturityLvlSect.CategoryName Maturity Level : @maturityLvlSect.QuestionCategoryLevels.MaturityLevel
+                            </div>
+                            <i class="@maturityLvlSect.IconPath dash-card-icon"></i>
+                        </div>
+                        <div class="card-body-assessments">
+                            <div class="row">
+                                <cid class="col">
+                                    <div id="@chartName">
+
+                                    </div>
+                                </cid>
+
+                            </div>
+
+                        </div>
+                        <div class="assess-edit">
+                            <button type="button" class="btn review-btn" data-bs-toggle="modal" data-bs-target="@modalTarget">Details</button>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="modal fade" id="@modalID" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog  modal-dialog-centered modal-lg" style="max-width: 1800px !important;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title" id="exampleModalLabel">@maturityLvlSect.CategoryName</h3>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <MaturityLevelDashboardSectionDetail MaturityLevelSectionViewModel="@maturityLvlSect" />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+
+        }
+    </div>
+}
+
+
+

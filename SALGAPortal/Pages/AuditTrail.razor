@@ -1,0 +1,76 @@
+﻿@page "/AuditTrail"
+<AuthorizeView Policy="Only All Users Group" Roles="Admin">
+    <Authorized Context="stuff">
+        <div id="start"></div>
+        <div class="d-flex flex-row justify-content-start" style="margin-top:1em;">
+            <h3>Activity Log</h3>
+        </div>
+        <div class="row">
+            <h5><b>Filters:</b></h5>
+        </div>
+
+        <EditForm Model="@AuditResults">
+            <div class="d-flex flex-row justify-content-start">
+
+                <div>
+                    <InputDate id="startDate" @bind-Value="AuditResults.StartDate" class="inputDashboard" />
+                    <label>To:</label>
+                    <InputDate id="endtDate" @bind-Value="AuditResults.EndDate" class="inputDashboard" />
+                </div>
+                <div>
+                    <label>Municipality: </label>
+                    <InputSelect @bind-Value="SelectedMunicipality" class="dropdownDashboard">
+                        <option value="" selected>All</option>
+                        @foreach (var municipality in MunicipalityList)
+                        {
+                            <option value="@municipality">@municipality</option>
+                        }
+                    </InputSelect>
+                </div>
+
+                <button class="btn btn-primary" style="background-color: #f46d16; border: none; margin-left: 1em;" @onclick="()=>OnApply()">Apply</button>
+
+                <a class="btn btn-primary" style="background-color: #f46d16; border: none; margin-left: 1em;" href=@ExcelDownloadString>Export</a>
+                @*<button class="btn btn-primary" style="background-color: #f46d16; border: none; margin-left: 1em;" @onclick="()=>OnExport()">Apply</button>*@
+
+            </div>
+
+            <div class="row">
+                <div class="col" style="margin-top: 2em;">
+                    <table class="table table-sm table-bordered maturityLevelTable" style="background-color: white; border-radius: 3px;">
+                        <thead style=" vertical-align: bottom; background-color: #272d3e; color: white;">
+                            <tr>
+                                <th>Date</th>
+                                <th>Event</th>
+                                <th>User</th>
+                                <th>Item</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var auditEvent in AuditResults.AuditEvents)
+                            {
+                                <tr>
+                                    <td>@auditEvent.Date</td>
+                                    <td>@auditEvent.EventType</td>
+                                    <td>@auditEvent.UserEmail</td>
+                                    <td>@auditEvent.ItemName</td>
+                                    <td>@auditEvent.ItemPath</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </EditForm>
+    </Authorized>
+    <NotAuthorized>
+        <br />
+        <div>
+            <a href="#"><img src="\images\hr.jpg" alt="authorization" style="width:100%; height:100%"></a>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>

@@ -1,0 +1,63 @@
+﻿@page "/SummaryData"
+<AuthorizeView Policy="Only All Users Group">
+    <Authorized>
+        <h3>Profile Summaries</h3>
+        <div class="row">
+            <div class="d-flex flex-row justify-content-end">
+                <a class="btn btn-primary" style="background-color: #f46d16; border: none; margin-left: 1em;" href="/DownloadSummaryReportExcelData">Export</a>
+                <a class="btn btn-primary" style="background-color: #f46d16; border: none; margin-left: 1em;" href="/DownloadHistoricPDF?BlobName=Summary Maturity Profiles Historic.xlsx&ContainerName=EvidenceFiles">Historic Data</a>
+            </div>
+
+        </div>
+        <div class="row mt-2">
+            <div class="col">
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                    <div class="horizontal">
+                        <table class="table  table-sm table-bordered maturityLevelTable ">
+                            <thead>
+                                <tr>
+                                    <th>Municipality</th>
+                                    <th>Type</th>
+                                    <th>Province</th>
+                                    <th>Overall</th>
+                                    @foreach (var name in ValueChainNames)
+                                    {
+                                        <th>@name</th>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in SummaryItems)
+                                {
+                                    <tr>
+                                        <td>@item.MuncipalityName</td>
+                                        <td>@item.Type</td>
+                                        <td>@item.Province</td>
+                                        <td>@item.OverallMaturityLevel</td>
+                                        @foreach (var name in ValueChainNames)
+                                        {
+                                            @if (item.MaturityLevelValues.ContainsKey(name))
+                                            {
+                                                <td>@item.MaturityLevelValues[name]</td>
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <br />
+        <div>
+            <a href="#"><img src="\images\hr.jpg" alt="authorization" style="width:100%; height:100%"></a>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>

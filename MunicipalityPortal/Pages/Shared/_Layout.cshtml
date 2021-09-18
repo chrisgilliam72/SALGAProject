@@ -1,0 +1,353 @@
+﻿
+@using Microsoft.AspNetCore.Identity;
+@using MunicipalityPortal.ViewModels;
+@inject SignInManager<IdentityUser> _signInManager;
+@{
+    String SearchValue = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="~/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <!-- ONLY USING THIS DURING DEVELOPMENT TO PREVENT CSS CACHING -->
+    <meta http-equiv="cache-control" content="no-cache" />
+    <title>@ViewData["Title"] - HRPulse</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css" />
+    <link href="https://unpkg.com/ionicons@4.2.0/dist/css/ionicons.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    <!-- Google Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <script src="https://use.fontawesome.com/1a0b227f9b.js"></script>
+</head>
+<body>
+    <header>
+
+        @if (_signInManager.IsSignedIn(User))
+        {<!-- L O G G E D  I N  D A S H B O A R D  N A V B A R -->
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top custom-navbar-dashboard navbar-collapse ">
+                <div class="container">
+                    <div class="menu-btn" style="font-size: 30px; padding-right: 5px; padding-left: 5px; margin-right: 5px;" onclick="toggleNAV()">MENU</div>
+                    <img src="images/logo.png" class="nav-logo-desktop" alt="Company Logo">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+                            <li>
+                                <div class="topnav">
+                                    <div class="search-container">
+                                        <form method="get" asp-page="SearchResults">
+                                            <input type="text" placeholder=" Search.." name="SearchString" asp-for="@SearchValue">
+                                            <button type="submit"><i class="fa fa-search fa-lg"></i></button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="dropdown">
+                                    <a class="nav-link-dash nav-item nav-custom-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        @*<a class="nav-link nav-item nav-custom-link social dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">*@
+                                        <img src="images/user.png" class="dash-nav-user-icon" alt="user avatar">
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <form method="post" asp-page="Logout">
+                                            <button class="btn dash-logout" type="submit" value="signout"> &#8594; &nbsp;&nbsp;Log out </button>
+                                            <!-- elements to be added if features are required
+                                            <a class="dropdown-item-dash" href="tel:+27731328925">&#x263A; &nbsp;&nbsp;Edit profile</a>
+                                            <a class="dropdown-item-dash" href="https://wa.link/1i78p3">&#9881;&nbsp;&nbsp; Account</a>
+                                            -->
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- E N D  O F  N A V B A R -->
+
+        }
+        else
+        { <!-- L A N D I N G P A G E  N A V B A R -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top custom-navbar">
+                <div class="container">
+                    <img src="images/logo.png" class="nav-logo-desktop" alt="Company Logo">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+                            <li class="nav-item nav-custom-link">
+
+                                <a class="nav-link" href="home#hero">Home</a>
+                            </li>
+
+                            <li class="nav-item nav-custom-link">
+                                <a class="nav-link" href="home#selling">Features</a>
+                            </li>
+                            <li class="nav-item nav-custom-link">
+                                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#faq">FAQs</a>
+                            </li>
+
+
+                            <li>
+                                <div class="dropdown">
+                                    <a class="nav-link nav-item nav-custom-link social dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        @*<a class="nav-link nav-item nav-custom-link social dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">*@
+                                        Contact
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" href="mailto:municipalhrpulse@salga.org.za" data-toggle="modal" data-target="#emailModal" target="_blank"><img class="contact-icon" src="images/mail.png" />Email</a>
+                                        <a class="dropdown-item" href="#"><img class="contact-icon" src="images/phone.png" />(012) 369-8000</a>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <form method="post" asp-page="Logout">
+                                    @if (_signInManager.IsSignedIn(User))
+                                    {
+
+                                        <a class="btn btn-block fa fa-key fa-lg" asp-page="/ChangePassword"> Change Password</a>
+                                        <button class="btn btn-regular fa fa-sign-out fa-lg" type="submit" value="signout"> Sign Out</button> }
+                                    else
+                                    {
+                                        <a asp-page="./Register" class="btn btn-regular" value="register">REGISTER</a>
+                                        <a asp-page="./Login" class="btn btn-outline" value="register">LOGIN</a>
+                                    }
+
+                                </form>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- F A Q s  M O D A L -->
+            <div class="modal fade" id="faq" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                <div class="modal-dialog  modal-dialog-centered modal-lg">
+                    <div class="modal-content" style="border:1px solid">
+                        <div class="modal-header" style="font-size: 50px; font-weight: 500; color: white; text-align: center; background: #F46D16;text-align:center;justify-content:center">
+                            <h5>FREQUENTLY ASKED QUESTIONS</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <span style="font-size: 25px; display:inline-block; margin-right:.2em;">Q.</span><p style="display:inline-block;">How often should municipalities conduct a self-assessment?</p>
+                                <hr />
+                                <span style="font-size: 25px; display: inline-block; margin-right: 0.2em; color: #ff6a00;">A.</span><p style="display:inline-block;">Municipalities should conduct self-assessments ideally on an annual basis. This tool can be used as part of<br /> an annual assessment as well as to plan activities for the new financial year.</p>
+                                <hr />
+                                <span style="font-size: 25px; display:inline-block; margin-right:0.2em;">Q.</span><p style="display:inline-block;">Who should complete the questionnaire?</p>
+                                <hr />
+                                <span style="font-size: 25px; display:inline-block; margin-right:0.2em;color:#ff6a00;">A.</span><p style="display:inline-block;">It is recommended that the questionnaire be completed by a suitably authorised and functionally relevant<br /> official with cross cutting responsibilities over all Human Capital value chain<br /> elements (e.g. Head of Corporate Services, Head of Human Resource Management)</p>
+                                <hr />
+                                <span style="font-size: 25px; display: inline-block; margin-right: 0.2em;">Q.</span><p style="display:inline-block;">Do I have to be at the premises of the municipality to log in?</p>
+                                <hr />
+                                <span style="font-size: 25px; display: inline-block; margin-right: 0.2em; color: #ff6a00;">A.</span><p > No, The tool is a web based portal that you can access through the internet at any location</p>
+                                <hr />
+                                <span style="font-size: 25px; display: inline-block; margin-right: 0.2em;">Q.</span><p style="display:inline-block;">Can I save a submission for later editing?</p>
+                                <hr />
+                                <span style="font-size: 25px; display: inline-block; margin-right: 0.2em; color: #ff6a00;">A.</span><p >Yes, you can. Kindly click on the “Save” button.</p>
+                                <hr />
+                                <span style="font-size: 25px; display: inline-block; margin-right: 0.2em;">Q.</span><p style="display:inline-block;">Can I amend the submission details after it has been submitted for approval?</p>
+                                <hr />
+                                <span style="font-size: 25px; display: inline-block; margin-right: 0.2em; color: #ff6a00;">A.</span><p style="display:inline-block;">No. You should notify your approver to reject the submission. After the submission has been rejected, you<br /> can retrieve the submission for amendment however an approved submission cannot be amended.</p>
+                                <hr />
+                                <span style="font-size: 25px; display: inline-block; margin-right: 0.2em;">Q.</span><p >Is there an automatic log-out from the tool after a certain time?</p>
+                                <hr />
+                                <span style="font-size: 25px; display: inline-block; margin-right: 0.2em; color: #ff6a00;">A.</span><p>Yes there is an auto log-out.</p>
+                                <hr />
+                                <span style="font-size: 25px; display: inline-block; margin-right: 0.2em;">Q.</span><p style="display:inline-block;">What can I do if I forgot my User ID?</p>
+                                <hr />
+                                <span style="font-size: 25px; display: inline-block; margin-right: 0.2em; color: #ff6a00;">A.</span><p >You can use the “Forgot User ID” function on the login page. Follow the instructions and your User ID(s)<br /> will be sent to your registered email address</p>
+                                <hr />
+                                <span style="font-size: 25px; display: inline-block; margin-right: 0.2em;">Q.</span><p style="display:inline-block;">Is there any restriction on the format of the documents that must be uploaded as evidence?</p>
+                                <hr />
+                                <span style="font-size: 25px; display: inline-block; margin-right: 0.2em; color: #ff6a00;">A.</span><p>
+                                    Yes. All documents must meet the following criteria:
+                                    <ol style="font-size: 12px;">
+                                        <li>
+                                            Either Adobe PDF, MS Word or Excel
+                                        </li>
+                                        <li>
+                                            Must NOT in a compressed format (e.g. as a “zip” file); and
+                                        </li>
+                                        <li>
+                                            Must NOT be password protected.
+                                        </li>
+                                    </ol>
+                                </p>
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- E N D  O F  F A Qs  M O D A L -->
+        }
+
+    </header>
+
+
+    <div class="stage-container">
+        @if (_signInManager.IsSignedIn(User))
+        {
+            <div class="logged-stage justify-content-center" style="background-color: #ECF1F0;">
+                <main role="main" class="pb-3">
+                    <div id="start"></div>
+                    <div id="sidenav" class="sidenav" style="display:none">
+                        <li><i class="material-icons-dash">home</i> <a asp-page="./Dashboard" class="sidenav-link">Dashboard</a></li>
+                        <li><i class="material-icons-dash">grading</i><a asp-page="./AssessmentQuestions" class="sidenav-link">Assessments</a></li>
+                        <li><i class="material-icons-dash">leaderboard</i> <a asp-page="./WordReport" class="sidenav-link">Report</a></li>
+                        <!--<li><i class="material-icons-dash">manage_search</i> <a asp-page="./WordReport" class="sidenav-link">Audit trail</a></li>-->
+                        <li><i class="material-icons-dash">apartment</i> <a asp-page="./DemographicInfo" class="sidenav-link">Demographic info</a></li>
+                    </div>
+                    <div id="sidenav-skirt" style="display:none;" onclick="toggleNAV()"></div>
+                    @RenderBody()
+                </main>
+                <a href="#start">
+                    <span id="upBTN" class="jumpUp" style="display:none;">
+                        Jump<br />
+                        Up
+                    </span>
+                </a>
+            </div> }
+        else
+        {
+            <div class="d-flex justify-content-center">
+
+                <main role="main" style="width: 100%;">
+                    <div id="start"></div>
+                    @RenderBody()
+                </main>
+                <a href="#start">
+                    <span id="upBTN" class="jumpUp" style="display:none;">
+                        Jump<br />
+                        Up
+                    </span>
+                </a>
+            </div>}
+    </div>
+
+    <!-- S T A R T I N G  F O O T E R -->
+    @if (_signInManager.IsSignedIn(User))
+    {
+        <div class="footer">
+            <div class="container foot-tainer">
+
+                <p>&#169; All rights reserved SALGA</p>&nbsp;&nbsp;<a class="footer-links" asp-page="./Privacy" data-toggle="modal" data-target="#privacyModal">Legal Notice Disclaimer</a>
+                <p></p>
+
+            </div>
+
+        </div> }
+    else
+    {
+        <footer>
+            <div class="container foot-tainer-landing">
+
+                <p><b>&#169; All rights reserved SALGA</b></p>
+                <p><a class="footer-links" asp-page="./Privacy" data-toggle="modal" data-target="#privacyModal">Legal Notice Disclaimer</a></p>
+                <p>TELEPHONE: <b>(012) 369-8000</b> EMAIL: <b>municipalhrpulse@salga.org.za</b></p>
+
+            </div>
+        </footer>}
+
+    <!-- E N D  F O O T E R -->
+    @*<script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+        <script src="https://use.fontawesome.com/bbd80a7a6b.js"></script>*@
+
+    <script type="text/javascript">
+        function toggleNAV() {
+            var bar = document.getElementById('sidenav');
+            var skirt = document.getElementById('sidenav-skirt')
+
+            if (bar.style.display === 'none') {
+                bar.style.display = "block";
+                skirt.style.display = "inline-block";
+            }
+            else {
+                bar.style.display = "none";
+                skirt.style.display = "none";
+            }
+
+        }
+    </script>
+
+    <script>
+        $('.navbar-collapse a').click(function () {
+            $(".navbar-collapse").collapse('hide');
+        });
+    </script>
+    <!-- paragraph toggler -->
+    <script>
+        var listField = document.getElementById('orderdList');
+        var moreBTN = document.getElementById('more');
+
+        function openMORE() {
+            if (listField.style.height == '18%') {
+                listField.style.height = 'auto';
+                moreBTN.style.display = 'none';
+            } else {
+                listField.style.height = '18%';
+                moreBTN.style.display = 'inline-block';
+            }
+        }
+    </script>
+    <!-- Table of contents togger -->
+    <script>
+        var toc = document.getElementById('toc');
+
+        function TOCtoggle() {
+            if (toc.style.display == 'none') {
+                toc.style.display = 'block';
+            }
+            else {
+                toc.style.display = "none";
+            }
+        }
+    </script>
+    <!-- Controls when the jump up button should appears -->
+    <script>
+        window.onscroll = function () { jumpUP() };
+
+        function jumpUP() {
+            if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+                document.getElementById("upBTN").style.display = "block";
+            } else {
+                document.getElementById("upBTN").style.display = "none";
+            }
+        }
+    </script>
+    <!-- General Back button handler -->
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+    <script>
+        function hideMenu() {
+            $(".sidr-open #main-nav").click();
+        }
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>
